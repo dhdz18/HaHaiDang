@@ -1,0 +1,3016 @@
+name: "👑 Nguyễn Ngọc Anh Tú 🌸 ⁕ Ultimate Premium (Egern) ⁕"
+description: "🚀 Mở khóa 350+ App VIP (Locket Gold 45s Video, Spotify, YouTube, Captions AI, iScreen, MD Vinyl, Moises, Structured, Remini, PhotoRoom, ELSA, OldRoll, iTunes 250+). 🛡️ Chặn Ads & Tracking. 🎮 Gaming DIRECT. 📺 Streaming PROXY. ⚡ Tối ưu DNS, Banking, GeoIP VN & Privacy. | v3.2.5-apex (2026-10-30)"
+author: "Nguyễn Ngọc Anh Tú (z3rokaze)"
+homepage: "https://github.com/K4Z3X0R/NguyenNgocAnhTu"
+icon: "lock.open.fill"
+
+dns:
+  enable: true
+  # DoH có lọc (ads/tracking/malware), bỏ "system" (tránh rò rỉ DNS plaintext) — đồng bộ Premium.module.
+  # Fallback ControlD p2 — KHÔNG p3 vì p3 chặn thêm Social (Facebook/Instagram/TikTok…).
+  servers:
+    - "https://dns.adguard-dns.com/dns-query"
+    - "https://freedns.controld.com/p2"
+
+rules:
+  # --- Block iOS OTA Updates (Triệt để) ---
+  - domain:
+      match: "mesu.apple.com"
+      policy: REJECT
+  - domain:
+      match: "gdmf.apple.com"
+      policy: REJECT
+  - domain:
+      match: "updates-http.apple.com"
+      policy: REJECT
+  - domain:
+      match: "appldnld.apple.com"
+      policy: REJECT
+  - domain:
+      match: "swcdn.apple.com"
+      policy: REJECT
+  - domain:
+      match: "xp.apple.com"
+      policy: REJECT
+  # --- Block App Store Search Ads ---
+  - domain:
+      match: "searchads.apple.com"
+      policy: REJECT
+  - domain:
+      match: "iad.apple.com"
+      policy: REJECT
+  - domain:
+      match: "iadsdk.apple.com"
+      policy: REJECT
+  # === BLOCK QUIC FOR YOUTUBE MITM ===
+  # EGERN NOT SUPPORT: cú pháp AND,((...),(PROTOCOL,UDP)),REJECT (giống Stash) — giữ tham chiếu, KHÔNG bật.
+  # AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
+  # AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
+  # AND,((DOMAIN,firebaseremoteconfig.googleapis.com), (PROTOCOL,UDP)),REJECT
+  # === BLOCK WEBRTC LEAK (Specific servers) ===
+  # Note: Generic KEYWORD stun/turn removed — breaks VoIP (FaceTime, WhatsApp, Zoom)
+  - domain_suffix:
+      match: "stun.l.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "stun1.l.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "stun2.l.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "stun3.l.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "stun4.l.google.com"
+      policy: REJECT
+  # === BLOCK SPOTIFY ADS & TRACKERS 100% ===
+  # Note: audio-ak and heads-ak must be DIRECT to stream audio smoothly
+  - domain_suffix:
+      match: "audio-ak-spotify-com.akamaized.net"
+      policy: DIRECT
+  - domain_suffix:
+      match: "audio4-ak-spotify-com.akamaized.net"
+      policy: DIRECT
+  - domain_suffix:
+      match: "heads-ak-spotify-com.akamaized.net"
+      policy: DIRECT
+  - domain_suffix:
+      match: "heads4-ak-spotify-com.akamaized.net"
+      policy: DIRECT
+  - domain_suffix:
+      match: "audio-fa.scdn.co"
+      policy: REJECT
+  - domain:
+      match: "spclient.wg.spotify.com"
+      policy: DIRECT
+  - domain:
+      match: "api.spotify.com"
+      policy: DIRECT
+  # === ZERO LOGIN FAILURE (SPOTIFY, GOOGLE, FIREBASE & APPLE ID) ===
+  - domain_suffix:
+      match: "dealer.spotify.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "login.spotify.com"
+      policy: DIRECT
+  - domain:
+      match: "accounts.google.com"
+      policy: DIRECT
+  - domain:
+      match: "accounts.youtube.com"
+      policy: DIRECT
+  - domain:
+      match: "oauth2.googleapis.com"
+      policy: DIRECT
+  - domain:
+      match: "passkeys.google.com"
+      policy: DIRECT
+  - domain:
+      match: "identitytoolkit.googleapis.com"
+      policy: DIRECT
+  - domain:
+      match: "securetoken.googleapis.com"
+      policy: DIRECT
+  - domain:
+      match: "appleid.apple.com"
+      policy: DIRECT
+  - domain_keyword:
+      match: "spotify-ads"
+      policy: REJECT
+  - domain_suffix:
+      match: "ads-fa.spotify.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "analytics.spotify.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adeventtracker.spotify.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "log.spotify.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "creativeservice-production.scdn.co"
+      policy: REJECT
+  - domain_suffix:
+      match: "gads.current.spotify.com"
+      policy: REJECT
+  # --- Spotify Podcast Ads & Canvas (v2.8.0) ---
+  - domain:
+      match: "audio-sp-sto.pscdn.co"
+      policy: REJECT
+  - domain:
+      match: "audio-sp-ash.pscdn.co"
+      policy: REJECT
+  - domain:
+      match: "audio-sp-dca.pscdn.co"
+      policy: REJECT
+  - domain:
+      match: "audio-sp-lon.pscdn.co"
+      policy: REJECT
+  - domain:
+      match: "podcastads.spotify.com"
+      policy: REJECT
+  # ===========================================================
+  # === CHáº¶N QUáº¢NG CÃO + Cá»œ Báº C/CÃ Äá»˜ Tá»”NG Há»¢P (Ad Block) ===
+  # === by z3rokaze - 2026-05-27 (Ultimate Edition)            ===
+  # ===========================================================
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 1: CHáº¶N QUáº¢NG CÃO (AD BLOCK) â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 1.1 Google Ads / AdMob / DoubleClick ---
+  - domain_suffix:
+      match: "adservice.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adservice.google.com.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "admob.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "app-measurement.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "googleadservices.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "googlesyndication.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "doubleclick.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "ads.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pagead-googlehosted.l.google.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "googletagmanager.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "googleads"
+      policy: REJECT
+  - domain_keyword:
+      match: "google-analytics"
+      policy: REJECT
+  # --- 1.2 Facebook / Meta Ads ---
+  - domain_suffix:
+      match: "an.facebook.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ads.facebook.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adtago.s3.amazonaws.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pixel.facebook.com"
+      policy: REJECT
+  # --- 1.3 Unity Ads ---
+  - domain_suffix:
+      match: "unityads.unity3d.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ads.unity3d.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "unityads"
+      policy: REJECT
+  # --- 1.4 AppLovin / MAX ---
+  - domain_suffix:
+      match: "applovin.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "applvn.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "applovin"
+      policy: REJECT
+  # --- 1.5 IronSource / LevelPlay ---
+  - domain_suffix:
+      match: "ironsrc.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "supersonicads.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "ironsource"
+      policy: REJECT
+  # --- 1.6 Vungle / Liftoff ---
+  - domain_suffix:
+      match: "vungle.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "liftoff.io"
+      policy: REJECT
+  - domain_keyword:
+      match: "vungle"
+      policy: REJECT
+  # --- 1.7 Chartboost ---
+  - domain_suffix:
+      match: "chartboost.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "chartboost"
+      policy: REJECT
+  # --- 1.8 InMobi ---
+  - domain_suffix:
+      match: "inmobi.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "inmobi"
+      policy: REJECT
+  # --- 1.9 Mintegral / Mobvista ---
+  - domain_suffix:
+      match: "mintegral.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "rayjump.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mobvista.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "mintegral"
+      policy: REJECT
+  # --- 1.10 AdColony / Digital Turbine ---
+  - domain_suffix:
+      match: "adcolony.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "digitalturbine.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "adcolony"
+      policy: REJECT
+  # --- 1.11 MoPub (Twitter) ---
+  - domain_suffix:
+      match: "mopub.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "mopub"
+      policy: REJECT
+  # --- 1.12 Fyber / Digital Turbine ---
+  - domain_suffix:
+      match: "fyber.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "inner-active.mobi"
+      policy: REJECT
+  # --- 1.13 Smaato ---
+  - domain_suffix:
+      match: "smaato.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "smaato.net"
+      policy: REJECT
+  # --- 1.14 Tapjoy ---
+  - domain_suffix:
+      match: "tapjoy.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "tapjoy"
+      policy: REJECT
+  # --- 1.15 Pangle (TikTok Ads / ByteDance) ---
+  - domain_suffix:
+      match: "pangleglobal.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pglstatp-toutiao.com"
+      policy: REJECT
+  # DOMAIN-SUFFIX,byteimg.com,REJECT # Disabled: blocks TikTok images/videos
+  - domain_keyword:
+      match: "pangleglobal"
+      policy: REJECT
+  # --- 1.16 Amazon Ads ---
+  - domain_suffix:
+      match: "amazon-adsystem.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "aan.amazon.com"
+      policy: REJECT
+  # --- 1.17 StartApp / Start.io ---
+  - domain_suffix:
+      match: "startapp.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "start.io"
+      policy: REJECT
+  - domain_keyword:
+      match: "startapp"
+      policy: REJECT
+  # --- 1.18 Ogury ---
+  - domain_suffix:
+      match: "ogury.com"
+      policy: REJECT
+  # --- 1.19 Yahoo / Flurry ---
+  - domain_suffix:
+      match: "flurry.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ads.yahoo.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "analytics.yahoo.com"
+      policy: REJECT
+  # --- 1.20 Criteo ---
+  - domain_suffix:
+      match: "criteo.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "criteo.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "emailretargeting.com"
+      policy: REJECT
+  # --- 1.21 Teads (Video Ads) ---
+  - domain_suffix:
+      match: "teads.tv"
+      policy: REJECT
+  - domain_suffix:
+      match: "teads.com"
+      policy: REJECT
+  # --- 1.22 PubMatic ---
+  - domain_suffix:
+      match: "pubmatic.com"
+      policy: REJECT
+  # --- 1.23 OpenX ---
+  - domain_suffix:
+      match: "openx.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "openx.com"
+      policy: REJECT
+  # --- 1.24 Index Exchange ---
+  - domain_suffix:
+      match: "casalemedia.com"
+      policy: REJECT
+  # --- 1.25 SmartAdServer ---
+  - domain_suffix:
+      match: "smartadserver.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sascdn.com"
+      policy: REJECT
+  # --- 1.26 AdRoll ---
+  - domain_suffix:
+      match: "adroll.com"
+      policy: REJECT
+  # --- 1.27 Media.net ---
+  - domain_suffix:
+      match: "media.net"
+      policy: REJECT
+  # --- 1.28 RevContent / MGID / Content Ads ---
+  - domain_suffix:
+      match: "revcontent.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mgid.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "contentad.net"
+      policy: REJECT
+  # --- 1.29 ShareThrough / TripleLift / Nativo ---
+  - domain_suffix:
+      match: "sharethrough.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "triplelift.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "nativo.com"
+      policy: REJECT
+  # --- 1.30 Yandex Ads ---
+  - domain_suffix:
+      match: "an.yandex.ru"
+      policy: REJECT
+  - domain_suffix:
+      match: "yandexadexchange.net"
+      policy: REJECT
+  # --- 1.31 Baidu / Tencent Ads ---
+  - domain_suffix:
+      match: "pos.baidu.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "cpro.baidu.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "e.qq.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "gdt.qq.com"
+      policy: REJECT
+  # --- 1.32 Ad Verification / Viewability ---
+  - domain_suffix:
+      match: "moat.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "moatads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "doubleverify.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "integralads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsafeprotected.com"
+      policy: REJECT
+  # --- 1.33 TikTok Ads ---
+  - domain_suffix:
+      match: "ads.tiktok.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "analytics.tiktok.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ct.tiktok.com"
+      policy: REJECT
+  # DOMAIN-KEYWORD,bytedance,REJECT  # Disabled: too broad, blocks CapCut, TikTok, Lark
+  # --- 1.34 Additional Ad Networks ---
+  - domain_suffix:
+      match: "adform.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "adnxs.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adzerk.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "adtech.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adition.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adzerk.com"
+      policy: REJECT
+  # --- 1.35 New Ad Networks (2025-2026) ---
+  - domain_suffix:
+      match: "verve.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pubnative.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "appmetrica.yandex.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "report.appmetrica.yandex.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "moloco.com"
+      policy: REJECT
+  - domain_keyword:
+      match: "moloco"
+      policy: REJECT
+  - domain_suffix:
+      match: "bigoads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ad.xiaomi.com"
+      policy: REJECT
+  # --- 1.36 Ad Networks (2026) [SYNC] ---
+  - domain_suffix:
+      match: "bidmachine.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "bidease.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "prebid.org"
+      policy: REJECT
+  - domain_suffix:
+      match: "prebid.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "gumgum.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "smartyads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "loopme.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "kidoz.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "yieldmo.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "zeotap.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "id5-sync.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsmoloco.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "a-mo.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "adtarget.com.tr"
+      policy: REJECT
+  - domain_suffix:
+      match: "vidoomy.com"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 2: TRACKING & ANALYTICS SDKs  â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 2.1 Attribution / Mobile Measurement ---
+  - domain_suffix:
+      match: "adjust.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adjust.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "appsflyer.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "kochava.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "singular.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "tenjin.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "airbridge.io"
+      policy: REJECT
+  # --- 2.2 Analytics Platforms ---
+  - domain_suffix:
+      match: "mixpanel.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "amplitude.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "segment.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "segment.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "heapanalytics.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "fullstory.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "hotjar.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mouseflow.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "crazyegg.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "kissmetrics.com"
+      policy: REJECT
+  # --- 2.3 General Web Tracking ---
+  - domain_suffix:
+      match: "scorecardresearch.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "omtrdc.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "demdex.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsrvr.org"
+      policy: REJECT
+  # DOMAIN-SUFFIX,firebase.com,REJECT  # Disabled: breaks push notifications & auth
+  - domain_suffix:
+      match: "crashlytics.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "braze.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "clevertap.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "intercom.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mookie1.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "taboola.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "outbrain.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bluekai.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "everesttech.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "mathtag.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bidswitch.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "exelator.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "crwdcntrl.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "dotomi.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "serving-sys.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "eyeota.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "agkn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "rlcdn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "turn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "rubiconproject.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "contextweb.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "spotxchange.com"
+      policy: REJECT
+  # --- 2.4 Tracking (2026) [SYNC] ---
+  - domain_suffix:
+      match: "sentry.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "bugsnag.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "instabug.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "embrace.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "datadoghq.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "nr-data.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "newrelic.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "posthog.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "rudderstack.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "smartlook.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "quantcast.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "permutive.com"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 3: QUáº¢NG CÃO VIá»†T NAM        â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  - domain_suffix:
+      match: "adservice.zaloapp.com"
+      policy: REJECT
+  # DOMAIN-KEYWORD,zaloapp.com/ads,REJECT  # Disabled: DOMAIN-KEYWORD cannot match URL path
+  - domain_suffix:
+      match: "admicro.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsplay.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "adtima.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "eclick.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "novaon.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "nativex.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "adpia.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "ants.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "accesstrade.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "younetmedia.com"
+      policy: REJECT
+  # --- 3.1 VN Ads (2026) [SYNC] ---
+  - domain_suffix:
+      match: "vcmedia.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "goada.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "adnetwork.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "mcads.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "blueseed.tv"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 4: POPUP / REDIRECT / SCAM    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  - domain_suffix:
+      match: "popads.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "popcash.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "propellerads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "propellerclick.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "trafficjunky.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "revenuehits.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "exoclick.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "clickadu.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "hilltopads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "richpush.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pushengage.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsterra.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsterratools.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "trafficstars.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "juicyads.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "trafficfactory.biz"
+      policy: REJECT
+  - domain_suffix:
+      match: "clickaine.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "evadav.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "galaksion.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "onclickmx.com"
+      policy: REJECT
+  # --- 4.1 Popup/Malvertising (2026) [SYNC] ---
+  - domain_suffix:
+      match: "adcash.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mgcash.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "popunder.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "admaven.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ad-maven.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pushwhy.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "push-house.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "partner.pushhouse.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "datsprings.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "zeydoo.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "propu.sh"
+      policy: REJECT
+  - domain_suffix:
+      match: "vignatti.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mybetterdl.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "clickfuse.com"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 5: CHáº¶N WEB CÃ Äá»˜ / Cá»œ Báº C / CASINO (GAMBLING)  â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 5.1 CÃ¡ Ä‘á»™ / Cá» báº¡c phá»• biáº¿n táº¡i Viá»‡t Nam ---
+  - domain_suffix:
+      match: "1xbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "1xbet.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "fun88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "fun88asia.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "fun88vietnam.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "w88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "w88vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "w88top.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "188bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "188betasia.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "m88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "m88a.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "m88vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bk8.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bk8vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "fb88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "fb88vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sv388.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sv388vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sin88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sin88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "hi88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "hi88.bio"
+      policy: REJECT
+  - domain_suffix:
+      match: "hi88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "new88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "new88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "new88vn.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "8xbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "8xbet.gg"
+      policy: REJECT
+  - domain_suffix:
+      match: "jun88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "jun88.bio"
+      policy: REJECT
+  - domain_suffix:
+      match: "jun88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "vn88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "vn88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "789bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "789bet.gg"
+      policy: REJECT
+  - domain_suffix:
+      match: "789bet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "kubet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "kubet.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "kubet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "sobet.io"
+      policy: REJECT
+  - domain_suffix:
+      match: "sunwin.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sunwin.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "sunwin.gg"
+      policy: REJECT
+  - domain_suffix:
+      match: "iwin.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "iwin.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "iwin68.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "go88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "go88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "go88.gg"
+      policy: REJECT
+  - domain_suffix:
+      match: "rikvip.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "rikvip.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "rik.vip"
+      policy: REJECT
+  - domain_suffix:
+      match: "8day.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "8day.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "ta88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ta88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "tf88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "shbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "shbet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "luck8.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "luck8.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "mb66.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mb66.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "five88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "five88.gg"
+      policy: REJECT
+  - domain_suffix:
+      match: "zbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "zbet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "oxbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "oxbet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "ae888.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ae888.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "taya365.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "taya365.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "66bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "77bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "33win.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "33win.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "f8bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "f8bet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "bet88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bet88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "qh88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "qh88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "78win.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "78win.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "abc8.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "abc8.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "debet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "debet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "mu88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mu88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "gg8.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "gg8.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "b52.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "uy88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "top88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "top88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "betvisa.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "betvisa.vn"
+      policy: REJECT
+  - domain_suffix:
+      match: "bong88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bong88.net"
+      policy: REJECT
+  # --- 5.2 Trang cÃ¡ Ä‘á»™ quá»‘c táº¿ ---
+  - domain_suffix:
+      match: "bet365.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "22bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "mostbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "melbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "stake.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "1win.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "betwinner.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "parimatch.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "pin-up.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "linebet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "megapari.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "betway.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "dafabet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sbobet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "12bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "10bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "betfair.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "888casino.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "unibet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "leovegas.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "vulkanvegas.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "vulkanbet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bcgame.com"
+      policy: REJECT
+  # --- 5.2b Trang cÃ¡ Ä‘á»™ má»›i (2025-2026) ---
+  - domain_suffix:
+      match: "ok9.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "ok9.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "v9bet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "nohu.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "nohu90.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "hitclub.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "hitclub.gg"
+      policy: REJECT
+  # --- 5.2c Gambling (2026) [SYNC] ---
+  - domain_suffix:
+      match: "79king.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "79king.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "win79.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "may88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sao88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "typhu88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "vz99.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "dabet.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "dabet.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "sumvip.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sumvip.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "888b.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "888b.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "j88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "j88.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "vip66.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "68gamebai.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "king88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sky88.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "77win.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "77win.club"
+      policy: REJECT
+  - domain_suffix:
+      match: "99ok.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "good88.com"
+      policy: REJECT
+  # DOMAIN-KEYWORD,ok9,REJECT     # Disabled: too short, may match book9.com etc.
+  # DOMAIN-KEYWORD,hitclub,REJECT  # Disabled: may match legitimate domains
+  # --- 5.3 Keyword cháº·n cÃ¡ Ä‘á»™ phá»• biáº¿n ---
+  - domain_keyword:
+      match: "1xbet"
+      policy: REJECT
+  - domain_keyword:
+      match: "fun88"
+      policy: REJECT
+  - domain_keyword:
+      match: "w88vn"
+      policy: REJECT
+  - domain_keyword:
+      match: "8xbet"
+      policy: REJECT
+  - domain_keyword:
+      match: "jun88"
+      policy: REJECT
+  - domain_keyword:
+      match: "789bet"
+      policy: REJECT
+  - domain_keyword:
+      match: "kubet"
+      policy: REJECT
+  # DOMAIN-KEYWORD,sunwin,REJECT  # Disabled: may match sunwindows.com etc.
+  # DOMAIN-KEYWORD,go88,REJECT    # Disabled: may match cargo88.com, lego88.com etc.
+  - domain_keyword:
+      match: "new88"
+      policy: REJECT
+  # DOMAIN-KEYWORD,hi88,REJECT    # Disabled: may match sushi88.com, phi88.com etc.
+  # DOMAIN-KEYWORD,sin88,REJECT   # Disabled: may match resin88.com etc.
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 6: AI SERVICES ROUTING (PROXY)                â”‚
+  # â”‚  Nguá»“n: tatarinovms/ShadowRocketSimpleConfig         â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 6.1 OpenAI / ChatGPT ---
+  - domain_suffix:
+      match: "openai.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "chatgpt.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "oaistatic.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "oaiusercontent.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "chat.openai.com.cdn.cloudflare.net"
+      policy: PROXY
+  - domain_keyword:
+      match: "openai"
+      policy: PROXY
+  # --- 6.2 Anthropic / Claude ---
+  - domain_suffix:
+      match: "claude.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "anthropic.com"
+      policy: PROXY
+  # --- 6.3 Google AI ---
+  - domain_suffix:
+      match: "gemini.google.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "bard.google.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "makersuite.google.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "generativelanguage.googleapis.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "aistudio.google.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "deepmind.google"
+      policy: PROXY
+  # --- 6.4 Microsoft Copilot ---
+  - domain_suffix:
+      match: "copilot.microsoft.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "sydney.bing.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "edgeservices.bing.com"
+      policy: PROXY
+  # --- 6.5 Other AI Services ---
+  - domain_suffix:
+      match: "midjourney.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "stability.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "perplexity.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "huggingface.co"
+      policy: PROXY
+  - domain_suffix:
+      match: "poe.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "character.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "replicate.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "runway.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "suno.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "udio.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "cursor.sh"
+      policy: PROXY
+  - domain_suffix:
+      match: "v0.dev"
+      policy: PROXY
+  # --- 6.6 New AI Services (2025-2026) ---
+  - domain_suffix:
+      match: "x.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "deepseek.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "mistral.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "cohere.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "together.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "groq.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "bolt.new"
+      policy: PROXY
+  - domain_suffix:
+      match: "replit.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "windsurf.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "codeium.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "lovable.dev"
+      policy: PROXY
+  - domain_suffix:
+      match: "labs.google"
+      policy: PROXY
+  - domain_suffix:
+      match: "notebooklm.google"
+      policy: PROXY
+  - domain_suffix:
+      match: "notebooklm.google.com"
+      policy: PROXY
+  # --- 6.7 AI Services (2026) [SYNC] ---
+  - domain_suffix:
+      match: "grok.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "qwen.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "kimi.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "moonshot.cn"
+      policy: PROXY
+  - domain_suffix:
+      match: "genspark.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "manus.im"
+      policy: PROXY
+  - domain_suffix:
+      match: "abacus.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "fireworks.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "openrouter.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "elevenlabs.io"
+      policy: PROXY
+  - domain_suffix:
+      match: "heygen.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "pika.art"
+      policy: PROXY
+  - domain_suffix:
+      match: "krea.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "ideogram.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "leonardo.ai"
+      policy: PROXY
+  - domain_suffix:
+      match: "civitai.com"
+      policy: PROXY
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 7: Bá»” SUNG AD DOMAINS CÃ’N THIáº¾U              â”‚
+  # â”‚  Nguá»“n: GMOogway + fmz200/wool_scripts               â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 7.1 Bá»• sung Ad Networks ---
+  - domain_suffix:
+      match: "ads-twitter.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "advertising.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "liadm.com"
+      policy: REJECT
+  # DOMAIN-SUFFIX,branch.io,REJECT  # Disabled: breaks deep linking
+  # DOMAIN-SUFFIX,app.link,REJECT   # Disabled: breaks deep linking
+  # DOMAIN-SUFFIX,app.adjust.com,REJECT  # Redundant: covered by adjust.com in section 2.1
+  # DOMAIN-SUFFIX,s.adjust.com,REJECT    # Redundant: covered by adjust.com in section 2.1
+  - domain_suffix:
+      match: "impression.link"
+      policy: REJECT
+  - domain_suffix:
+      match: "metric.gstatic.com"
+      policy: REJECT
+  # DOMAIN-SUFFIX,pagead.l.doubleclick.net,REJECT  # Redundant: covered by doubleclick.net in section 1.1
+  # DOMAIN-SUFFIX,adx.g.doubleclick.net,REJECT     # Redundant: covered by doubleclick.net in section 1.1
+  # --- 7.2 Quáº£ng cÃ¡o á»©ng dá»¥ng Trung Quá»‘c ---
+  - domain_suffix:
+      match: "cm.bilibili.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "data.bilibili.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "zhihu-web-analytics.zhihu.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sugar.zhihu.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "118.etao.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "adash.m.taobao.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sclick.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "re.taobao.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "sdk.m.amap.com"
+      policy: REJECT
+  # --- 7.3 Phishing / Malware / Crypto Scam ---
+  # DOMAIN-KEYWORD,phishing,REJECT  # Disabled: too broad, blocks anti-phishing education sites
+  # DOMAIN-KEYWORD,malware,REJECT   # Disabled: too broad, blocks anti-malware.org etc.
+  - domain_suffix:
+      match: "coinhive.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "coin-hive.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "authedmine.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "cryptoloot.pro"
+      policy: REJECT
+  - domain_suffix:
+      match: "crypto-loot.com"
+      policy: REJECT
+  # --- 7.4 Crypto Scam (2026) [SYNC] ---
+  - domain_suffix:
+      match: "coinimp.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "webminepool.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "minero.cc"
+      policy: REJECT
+  - domain_suffix:
+      match: "jsecoin.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "coinhive-manager.com"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 8: CHáº¶N TELEMETRY & TRACKING Há»† THá»NG         â”‚
+  # â”‚  Nguá»“n: Johnshall/p-w-p                              â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 8.1 Microsoft Telemetry ---
+  - domain_suffix:
+      match: "data.microsoft.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "telemetry.microsoft.com"
+      policy: REJECT
+  # --- 8.2 Apple Analytics ---
+  - domain_suffix:
+      match: "metrics.icloud.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "metrics.mzstatic.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "supportmetrics.apple.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "books-analytics-events.apple.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "xp.apple.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "idiag.apple.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "iphonesubmissions.apple.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "radarsubmissions.apple.com"
+      policy: REJECT
+  # --- 8.3 Xiaomi / Huawei / Samsung Tracking ---
+  - domain_suffix:
+      match: "tracking.miui.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "data.mistat.xiaomi.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "tracking.rus.miui.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "logservice.hicloud.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "metrics.data.hicloud.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "samsungads.com"
+      policy: REJECT
+  # --- 8.4 Telemetry (2026) [SYNC] ---
+  - domain_suffix:
+      match: "vortex.data.microsoft.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "settings-win.data.microsoft.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "watson.telemetry.microsoft.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "samsung-com.112.2o7.net"
+      policy: REJECT
+  - domain_suffix:
+      match: "nmetrics.samsung.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "log.tbsapp.qq.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "oimg.vivo.com.cn"
+      policy: REJECT
+  - domain_suffix:
+      match: "adsdk.dplaceholder.oppomobile.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "bdapi.oppomobile.com"
+      policy: REJECT
+  - domain_suffix:
+      match: "iadsdk.apple.com"
+      policy: REJECT
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 9: GAMING SERVICES ROUTING (PROXY)             â”‚
+  # â”‚  Nguá»“n: tatarinovms/ShadowRocketSimpleConfig          â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 9.1 PlayStation Network ---
+  - domain_suffix:
+      match: "playstation.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "playstation.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "sonyentertainmentnetwork.com"
+      policy: PROXY
+  # --- 9.2 Xbox / Microsoft Gaming ---
+  - domain_suffix:
+      match: "xbox.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "xboxlive.com"
+      policy: PROXY
+  # --- 9.3 Steam ---
+  - domain_suffix:
+      match: "steampowered.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "steamcommunity.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "steamstatic.com"
+      policy: PROXY
+  # --- 9.4 Nintendo ---
+  - domain_suffix:
+      match: "nintendo.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "nintendo.net"
+      policy: PROXY
+  # --- 9.5 Epic Games ---
+  - domain_suffix:
+      match: "epicgames.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "unrealengine.com"
+      policy: PROXY
+  # --- 9.6 Riot Games (LOL, Valorant, TFT) ---
+  - domain_suffix:
+      match: "riotgames.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "leagueoflegends.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "riotcdn.net"
+      policy: PROXY
+  # --- 9.7 EA / Blizzard / Ubisoft ---
+  - domain_suffix:
+      match: "ea.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "origin.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "blizzard.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "battle.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "ubisoft.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "ubi.com"
+      policy: PROXY
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 10: STREAMING SERVICES (PROXY - Geo-unlock)    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 10.1 Netflix ---
+  - domain_suffix:
+      match: "netflix.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "netflix.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "nflximg.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "nflximg.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "nflxvideo.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "nflxso.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "nflxext.com"
+      policy: PROXY
+  # --- 10.2 Disney+ ---
+  - domain_suffix:
+      match: "disneyplus.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "disney-plus.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "dssott.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "bamgrid.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "disney-portal.my.onetrust.com"
+      policy: PROXY
+  # --- 10.3 Amazon Prime Video ---
+  - domain_suffix:
+      match: "primevideo.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "amazonvideo.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "aiv-cdn.net"
+      policy: PROXY
+  # --- 10.4 HBO / Max ---
+  - domain_suffix:
+      match: "hbomax.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "max.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "hbo.com"
+      policy: PROXY
+  # --- 10.5 Other Streaming ---
+  - domain_suffix:
+      match: "hulu.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "hulustream.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "tv.apple.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "crunchyroll.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "vrv.co"
+      policy: PROXY
+  - domain_suffix:
+      match: "dazn.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "bilibili.tv"
+      policy: PROXY
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 11: SOCIAL MEDIA ROUTING (PROXY)               â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 11.1 Telegram ---
+  - domain_suffix:
+      match: "telegram.org"
+      policy: PROXY
+  - domain_suffix:
+      match: "t.me"
+      policy: PROXY
+  - domain_suffix:
+      match: "telegra.ph"
+      policy: PROXY
+  - domain_suffix:
+      match: "telegram.me"
+      policy: PROXY
+  - ip_cidr:
+      match: "91.108.0.0/16"
+      policy: PROXY
+      no_resolve: true
+  - ip_cidr:
+      match: "149.154.160.0/20"
+      policy: PROXY
+      no_resolve: true
+  # --- 11.2 Discord ---
+  - domain_suffix:
+      match: "discord.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "discord.gg"
+      policy: PROXY
+  - domain_suffix:
+      match: "discordapp.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "discordapp.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "discord.media"
+      policy: PROXY
+  # --- 11.3 Reddit ---
+  - domain_suffix:
+      match: "reddit.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "redd.it"
+      policy: PROXY
+  - domain_suffix:
+      match: "redditmedia.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "redditstatic.com"
+      policy: PROXY
+  # --- 11.4 Threads / WhatsApp Web ---
+  - domain_suffix:
+      match: "threads.net"
+      policy: PROXY
+  - domain_suffix:
+      match: "web.whatsapp.com"
+      policy: PROXY
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 12: DEVELOPER TOOLS (PROXY)                    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 12.1 GitHub / GitLab ---
+  - domain_suffix:
+      match: "github.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "github.io"
+      policy: PROXY
+  - domain_suffix:
+      match: "githubusercontent.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "githubassets.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "gitlab.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "gitlab.io"
+      policy: PROXY
+  # --- 12.2 Package Registries ---
+  - domain_suffix:
+      match: "docker.io"
+      policy: PROXY
+  - domain_suffix:
+      match: "docker.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "npmjs.org"
+      policy: PROXY
+  - domain_suffix:
+      match: "npmjs.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "yarnpkg.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "pypi.org"
+      policy: PROXY
+  - domain_suffix:
+      match: "registry.npmmirror.com"
+      policy: PROXY
+  # --- 12.3 Developer Communities ---
+  - domain_suffix:
+      match: "stackoverflow.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "stackexchange.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "medium.com"
+      policy: PROXY
+  - domain_suffix:
+      match: "dev.to"
+      policy: PROXY
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 13: Tá»I Æ¯U Káº¾T Ná»I (DIRECT - Bá»Ž QUA VPN)       â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  # --- 13.1 Apple Services (Bypass for max speed & stability) ---
+  - domain_suffix:
+      match: "mzstatic.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "icloud.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "me.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "apple.com"
+      policy: DIRECT
+  # --- 13.2 Vietnamese Banking & E-Wallets (Anti-block & Bypass) ---
+  - domain_suffix:
+      match: "momo.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "mservice.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "zalopay.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vnpay.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vietcombank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "techcombank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "mbbank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "tpb.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vpbank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "bidv.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vtb.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vietinbank.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "agribank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "acb.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vib.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "sacombank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "hdbank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "ocb.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "shb.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "msb.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "lpbank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "eximbank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "namabank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "seabank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "cake.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vietqr.io"
+      policy: DIRECT
+  - domain_suffix:
+      match: "napas.com.vn"
+      policy: DIRECT
+  # --- Banking VN (2026) [SYNC] ---
+  - domain_suffix:
+      match: "timo.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "ubank.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "scb.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "abbank.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "pvcombank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "baovietbank.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "kienlongbank.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vietabank.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "bvbank.net.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "viettelmoney.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "viettelpay.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "moca.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "shopeepay.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "smartpay.vn"
+      policy: DIRECT
+  # --- 13.3 Popular Vietnamese Apps (Lightning fast local access) ---
+  - domain_suffix:
+      match: "zalo.me"
+      policy: DIRECT
+  - domain_suffix:
+      match: "zaloapp.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "shopee.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "shopeemobile.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "tiki.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "lazada.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "grab.com"
+      policy: DIRECT
+  - domain_suffix:
+      match: "be.com.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "fpt.vn"
+      policy: DIRECT
+  - domain_suffix:
+      match: "vnexpress.net"
+      policy: DIRECT
+  # --- 13.4 Vietnam Local Network & GeoIP (Lightning fast local traffic) ---
+  - domain_suffix:
+      match: "vn"
+      policy: DIRECT
+  - geoip:
+      match: "VN"
+      policy: DIRECT
+
+url_rewrites:
+  # YouTube Ads Block
+  - match: "^https?://[\\w-]+\\.googlevideo\\.com/(?!(dclk_video_ads|videoplayback\\?)).+&oad"
+    location: "reject-200"
+    status_code: 200
+  - match: "^https?://(www|s)\\.youtube\\.com/api/stats/ads"
+    location: "reject-200"
+    status_code: 200
+  - match: "^https?://(www|s)\\.youtube\\.com/(pagead|ptracking)"
+    location: "reject-200"
+    status_code: 200
+  - match: "^https?://s\\.youtube\\.com/api/stats/qoe\\?adcontext"
+    location: "reject-200"
+    status_code: 200
+
+header_rewrites:
+  - match: ^https?://www\.youtube\.com/youtubei/v1/player
+    header_replace:
+      x-youtube-client-version: "2.20240101.00.00"
+  # RevenueCat Remove ETag & Cache-Bust (Locket Gold + all RC apps)
+  - match: "^https?://api\\.revenuecat\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "X-RevenueCat-ETag"
+  - match: "^https?://api\\.revenuecat\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "if-none-match"
+  - match: "^https?://api\\.revenuecat\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "if-modified-since"
+  - match: "^https?://api\\.rc-backup\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "X-RevenueCat-ETag"
+  - match: "^https?://api\\.rc-backup\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "if-none-match"
+  - match: "^https?://api\\.rc-backup\\.com/.+/(receipts$|subscribers(\\/.*)?\\/?)"
+    action: del
+    field: "if-modified-since"
+  # Spotify Remove Cache
+  - match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/user-customization-service/v1/customize$"
+    action: del
+    field: "if-none-match"
+  # Spotify Premium Cache-Bust (giữ patch /v1/me & identity/v3/me không bị 304 cache đè)
+  - match: "^https://api\\.spotify\\.com/v1/me$"
+    action: del
+    field: "if-none-match"
+  - match: "^https://api\\.spotify\\.com/v1/me$"
+    action: del
+    field: "if-modified-since"
+  - match: "^https://api\\.spotify\\.com/v1/me$"
+    action: del
+    field: "etag"
+  - match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/(identity/v3/me|device-capabilities/v1/capabilities|user-attributes/v\\d+/attributes)$"
+    action: del
+    field: "if-none-match"
+  - match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/(identity/v3/me|device-capabilities/v1/capabilities|user-attributes/v\\d+/attributes)$"
+    action: del
+    field: "if-modified-since"
+  - match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/(identity/v3/me|device-capabilities/v1/capabilities|user-attributes/v\\d+/attributes)$"
+    action: del
+    field: "etag"
+  # iTunes Remove Cache Headers
+  - match: "^https?://buy\\.itunes\\.apple\\.com/verifyReceipt$"
+    action: del
+    field: "if-none-match"
+  - match: "^https?://buy\\.itunes\\.apple\\.com/verifyReceipt$"
+    action: del
+    field: "if-modified-since"
+
+scriptings:
+  # 📦 Sub-Store
+  - http_request:
+      name: "Sub-Store Core"
+      match: "^https?://sub\\.store/((download)|api/(preview|sync|(utils/node-info)))"
+      script_url: "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-1.min.js"
+      body_required: true
+      timeout: 120
+  - http_request:
+      name: "Sub-Store Simple"
+      match: "^https?://sub\\.store"
+      script_url: "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-0.min.js"
+      body_required: true
+      timeout: 30
+  - schedule:
+      name: "Sub-Store Sync"
+      cron: "0 0 * * *"
+      script_url: "https://github.com/sub-store-org/Sub-Store/releases/latest/download/cron-sync-artifacts.min.js"
+      timeout: 120
+
+  # 📺 YouTube Premium - K4Z3X0R
+  - http_request:
+      name: "YouTube Request"
+      match: "^https://youtubei\\.googleapis\\.com/youtubei/v1/(browse|next|player|reel/reel_watch_sequence|get_watch)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/youtube.response.js"
+      body_required: true
+      binary_body: true
+      max_size: 5242880
+      timeout: 30
+  - http_response:
+      name: "YouTube Response"
+      match: "^https://youtubei\\.googleapis\\.com/youtubei/v1/(browse|next|player|search|reel/reel_watch_sequence|guide|account/get_setting|get_watch)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/youtube.response.js"
+      body_required: true
+      binary_body: true
+      max_size: 5242880
+      timeout: 30
+      env:
+        lyricLang: "vi"
+        captionLang: "vi"
+        blockUpload: "false"
+        blockImmersive: "false"
+        debug: "false"
+
+  # 🎵 Spotify Premium (app2smile)
+  - http_request:
+      name: "Spotify JSON"
+      match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/(artistview/v1/artist|album-entity-view/v2/album)/"
+      script_url: "https://raw.githubusercontent.com/app2smile/rules/df6366a7024e0b3f0aa3510c5b791eea6f3cba89/js/spotify-json.js"
+      timeout: 30
+  - http_response:
+      name: "Spotify Proto"
+      match: "^https://(spclient\\.wg\\.spotify\\.com|.*-spclient\\.spotify\\.com(:443)?)/(bootstrap/v1/bootstrap|user-customization-service/v1/customize)$"
+      script_url: "https://raw.githubusercontent.com/app2smile/rules/df6366a7024e0b3f0aa3510c5b791eea6f3cba89/js/spotify-proto.js"
+      body_required: true
+      binary_body: true
+      timeout: 30
+  - http_response:
+      name: "Spotify Premium JSON"
+      match: "^https?://(api\\.spotify\\.com/v1/me|.*spclient.*\\.spotify\\.com(:443)?/(identity/v3/me|device-capabilities/v1/capabilities|user-attributes/v\\d+/attributes|bootstrap/v1/bootstrap|melody/v1/check_license))"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/spotify.js?v=2.9.5"
+      body_required: true
+      timeout: 30
+
+  # 🔐 RevenueCat Multi-App (Locket Gold)
+  - http_response:
+      name: "RevenueCat Response"
+      match: "^https://api\\.revenuecat\\.com/.+/(receipts$|subscribers/[^/]+$)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js?v=3.2.5"
+      body_required: true
+      timeout: 60
+  # (2.4.4) Gỡ script deleteHeader.js: ETag X-RevenueCat-ETag đã được xóa native ở
+  #         mục header_rewrites (cho cả api.revenuecat.com & api.rc-backup.com) -> script trùng lặp.
+  - http_response:
+      name: "RevenueCat Backup"
+      match: "^https://api\\.rc-backup\\.com/.+/(receipts$|subscribers/[^/]+$)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js?v=3.2.5"
+      body_required: true
+      timeout: 60
+  # 💛 Locket Gold 45s Video (Remote Config Rewrite)
+  - http_request:
+      name: "Locket 45s Video Request"
+      match: "^https?://firebaseremoteconfig\\.googleapis\\.com/v1/projects/.*"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Locket_30s.js?v=3.2.5"
+      timeout: 60
+  - http_response:
+      name: "Locket 45s Video"
+      match: "^https?://firebaseremoteconfig\\.googleapis\\.com/v1/projects/.*"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Locket_30s.js?v=3.2.5"
+      body_required: true
+      timeout: 30
+
+
+  # 🎧 SoundCloud Go+ (K4Z3X0R)
+  - http_response:
+      name: "SoundCloud Go+"
+      match: "^https?://api-mobile\\.soundcloud\\.com/configuration/ios"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/soundcloud.js"
+      body_required: true
+      timeout: 30
+
+  # 🎨 PicsArt Gold
+  - http_response:
+      name: "PicsArt Subscription"
+      match: "^https://api\\.picsart\\.com/gw-v2/shop/subscription/apple/purchases"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js"
+      body_required: true
+      timeout: 60
+  - http_response:
+      name: "PicsArt Storages"
+      match: "^https://api\\.picsart\\.com/gw-v2/cloud-storage/v1/me/storages"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js"
+      body_required: true
+      timeout: 60
+  - http_response:
+      name: "PicsArt NobyDa"
+      match: "^https?://api\\.(picsart|meiease)\\.c(n|om)/users/show/me\\.json"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js"
+      body_required: true
+      timeout: 60
+
+  # 🎨 Lightroom (yfamilys)
+  - http_response:
+      name: "Lightroom Premium"
+      match: "^https://photos\\.adobe\\.io/v2/accounts"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🎨 Photoshop Express
+  - http_response:
+      name: "Photoshop Express"
+      match: "^https://lcs-mobile-cops\\.adobe\\.io/mobile_profile"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/photoshop.js"
+      body_required: true
+      timeout: 30
+
+  # 🎬 Emby Premiere
+  - http_response:
+      name: "Emby Premiere"
+      match: "^https?://mb3admin\\.com/admin/service/registration/validateDevice"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/emby.js"
+      body_required: true
+      timeout: 30
+
+  # 🎬 Rophim VIP & T-Coin Unlimited (bypass-webfilm)
+  - http_response:
+      name: "Rophim VIP"
+      match: "^https?:\\/\\/.*rophim.*?\\/(baseapi\\/api\\/v1\\/(tcoin\\/me|user|vip)|api\\/auth\\/session)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/rophim.js"
+      body_required: true
+      timeout: 30
+
+  # 🎬 Cinema Webfilm Mobile Bypass & Anti-StreamGuard (bypass-webfilm)
+  - http_response:
+      name: "Webfilm Cinema Bypass"
+      match: "^https?:\\/\\/.*(rophim|phimmoi|xoiphim|subnhanh|dongphim|motphim).*?\\/.*"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/webfilm_inject.js"
+      body_required: true
+      timeout: 30
+
+  # 🎬 KineMaster Pro
+  - http_response:
+      name: "KineMaster Pro"
+      match: "^https://api-account\\.kinemasters\\.com/v\\d/user/subscribe$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Kinemaster.js"
+      body_required: true
+      timeout: 30
+
+  # 🎵 Djay Pro
+  - http_response:
+      name: "Djay Pro"
+      match: "^https://app\\.algoriddim\\.com/api/v1/validate-receipt"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/djay.js"
+      body_required: true
+      timeout: 30
+
+  # 🧘 Calm (K4Z3X0R)
+  - http_response:
+      name: "Calm Premium"
+      match: "^https?://api\\.calm\\.com/(me|device|ios/receipt)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/calm.js"
+      body_required: true
+      timeout: 30
+
+  # 📚 Busuu
+  - http_response:
+      name: "Busuu Premium"
+      match: "^https://api\\.busuu\\.com/users/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/busuu.js"
+      body_required: true
+      timeout: 30
+
+  # 🦉 Duolingo
+  - http_response:
+      name: "Duolingo Super"
+      match: "^https?://(api|ios-api-cdn)\\.duolingo\\.com/(2017-06-30/users/|users/)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/duolingo.js"
+      body_required: true
+      timeout: 30
+
+  # 🎓 ELSA Speak VIP
+  - http_response:
+      name: "ELSA Speak VIP"
+      match: "^https?://pool\.elsanow\.io/(user/api/v\d+/purchase|entitlement/api/v\d+/user/entitlements)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/elsa.js"
+      body_required: true
+      timeout: 30
+
+  # 🛡️ AdGuard Safari Pro
+  - http_response:
+      name: "AdGuard Safari Pro"
+      match: "^https?://mobile-api\.adguard\.org/api/.+/ios_validate_receipt/"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/adguard.js"
+      body_required: true
+      timeout: 30
+
+  # ✍️ Grammarly Premium
+  - http_response:
+      name: "Grammarly Premium"
+      match: "^https?://.*\.grammarly\.com/(api/v\d+/subscription|v\d+/user/oranonymous)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/grammarly.js"
+      body_required: true
+      timeout: 30
+
+  # 🍰 Cake
+  - http_response:
+      name: "Cake English Plus"
+      match: "^https?://api\\.mycake\\.me/v\\d+/users/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/cake.js"
+      body_required: true
+      timeout: 30
+
+  # 📑 Quizlet
+  - http_response:
+      name: "Quizlet Plus"
+      match: "^https?://quizlet\\.com/webapi/3\\.4/users/"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/quizlet.js"
+      body_required: true
+      timeout: 30
+
+  # 🧘 Headspace
+  - http_response:
+      name: "Headspace Premium"
+      match: "^https://api\\.prod\\.headspace\\.com/.*/user-subscriptions"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/headspace.js"
+      body_required: true
+      timeout: 30
+
+  # 🎬 AlightMotion Pro
+  - http_response:
+      name: "AlightMotion Pro"
+      match: "^https://us-central1-alight-creative\\.cloudfunctions\\.net/getAccountStatusAndLicenses"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/AlightMotion.js"
+      body_required: true
+      timeout: 30
+
+  # 💄 Wink Forever VIP
+  - http_response:
+      name: "Wink VIP"
+      match: "^https?://api-sub\\.meitu\\.com/.*vip"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Wink.js"
+      body_required: true
+      timeout: 30
+
+  # 📞 Truecaller Premium
+  - http_response:
+      name: "Truecaller Premium"
+      match: "^https://premium-(.+)\\.truecaller\\.com/v\\d/(subscriptions|products/apple)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/TrueCaller.js"
+      body_required: true
+      timeout: 30
+
+  # 📄 CamScanner Premium
+  - http_response:
+      name: "CamScanner Premium"
+      match: "^https://(api|api-cs.*)\\.intsig\\.net/(purchase/cs/query_prop|queryProperty|getPrivilegeItem)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/camScanner.js"
+      body_required: true
+      timeout: 30
+
+  # 💄 BeautyPlus Premium
+  - http_response:
+      name: "BeautyPlus Premium"
+      match: "^https://(api\\.mr\\.pixocial\\.com/v1/manual_unlock|newbeee-api\\.beautyplus\\.com/api/v1/asset/balance)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/BeautyPlus.js"
+      body_required: true
+      timeout: 60
+
+  # 📸 VSCO X
+  - http_response:
+      name: "VSCO Premium"
+      match: "^https://vsco\\.co/api/subscriptions/2\\.1/user-subscriptions"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/VSCO.js"
+      body_required: true
+      timeout: 30
+
+  # ❄️ Snow / Epik
+  - http_response:
+      name: "Snow Premium"
+      match: "^https?://user-snow-api\\.snow\\.me/v\\d/purchase/subscription/subscriber/status"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Snow.js"
+      body_required: true
+      timeout: 60
+
+  # 📷 B612 Kaji VIP (yfamilys)
+  - http_response:
+      name: "B612 VIP"
+      match: "^https?://user-kaji-api\\.b612kaji\\.com/v\\d/purchase/subscription/subscriber/status"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Snow.js"
+      body_required: true
+      timeout: 60
+
+  # 🎨 Meitu XiuXiu
+  - http_response:
+      name: "Meitu XiuXiu"
+      match: "^https?://(h5|api)\\.xiuxiu\\.meitu\\.com/v\\d/(h\\d/vip|vip|user)/"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/meitu.js"
+      body_required: true
+      timeout: 60
+
+  # 🎬 Funimate Pro
+  - http_response:
+      name: "Funimate Pro"
+      match: "^https://api\\.funimate\\.com/users/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/funimate.js"
+      body_required: true
+      timeout: 30
+
+  # 🍎 iTunes Premium (250+ Apps)
+  - http_response:
+      name: "iTunes Premium"
+      match: "^https?://buy\\.itunes\\.apple\\.com/verifyReceipt$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/iTunes.js"
+      body_required: true
+      timeout: 60
+
+  # 📝 WPS Office (K4Z3X0R)
+  - http_response:
+      name: "WPS Office"
+      match: "^https?://.*?account\\.wps\\.(com|cn)(:\\d+)?/api/users/\\w+/overview$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/wps.js"
+      body_required: true
+      timeout: 30
+
+  # 🎨 Darkroom Pro (K4Z3X0R)
+  - http_response:
+      name: "Darkroom Pro"
+      match: "^https://v1\\.darkroom\\.co/v1/receipts/apple"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/darkroom.js"
+      body_required: true
+      timeout: 30
+
+  # 📷 OldRoll Camera VIP (K4Z3X0R)
+  - http_response:
+      name: "OldRoll Camera"
+      match: "^https?://com\\.zijayrate\\.analogcam/vipforever10"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/oldroll.js"
+      body_required: true
+      timeout: 30
+
+  # 🧠 Xmind
+  - http_response:
+      name: "Xmind Premium"
+      match: "^https?://www\\.xmind\\.(cn|net|app)/_res/devices"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/xmind.js"
+      body_required: true
+      timeout: 30
+
+  # 🔔 Alarmy Premium
+  - http_response:
+      name: "Alarmy Premium"
+      match: "^https://ars\\.alar\\.my/api/v2/user/sync"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # ✍️ Grammarly Premium (yfamilys)
+  - http_response:
+      name: "Grammarly Premium"
+      match: "^https?://subscription\\.grammarly\\.com/api/v1/subscription$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/grammarly.js"
+      body_required: true
+      timeout: 30
+
+  # 📒 Notability Plus (yfamilys)
+  - http_response:
+      name: "Notability Plus"
+      match: "^https://notability\\.com/subscriptions"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🧮 Photomath Plus (yfamilys)
+  - http_response:
+      name: "Photomath Plus"
+      match: "^https?://lapi\\.photomath\\.net/v4/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/photomath.js"
+      body_required: true
+      timeout: 30
+
+  # 📄 Smallpdf Pro (yfamilys)
+  - http_response:
+      name: "Smallpdf Pro"
+      match: "^https?://pro\\.smallpdf\\.com/pro/account"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🧠 Peak Pro (yfamilys)
+  - http_response:
+      name: "Peak Pro"
+      match: "^https://billing\\.peakcloud\\.org/billing/2/user/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🎨 Polarr Pro (yfamilys)
+  - http_response:
+      name: "Polarr Pro"
+      match: "^https://api\\.polaxiong\\.com/v1/payments/appleiap/receipts/confirmation"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🏃 MyFitnessPal Premium (yfamilys)
+  - http_response:
+      name: "MyFitnessPal Premium"
+      match: "^https?://premium-api\\.myfitnesspal\\.com/v3/subscriptions/MFP/"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 🎼 Musixmatch Premium (yfamilys)
+  - http_response:
+      name: "Musixmatch Premium"
+      match: "^https?://apic\\.musixmatch\\.com/ws/1\\.1/config\\.get"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # 📷 Fimo Camera (K4Z3X0R)
+  - http_response:
+      name: "Fimo Camera"
+      match: "^https://server\\.yoyiapp\\.com/fimo-user/user$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/fimo.js"
+      body_required: true
+      timeout: 30
+
+  # 📷 Varlens Premium (yfamilys)
+  - http_response:
+      name: "Varlens Premium"
+      match: "^https://mid\\.zineapi\\.com/@varlens/api/user/info/"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+      timeout: 30
+      timeout: 30
+      timeout: 30
+      timeout: 30
+      timeout: 30
+  # 🎵 Boom Equalizer (yfamilys)
+  - http_response:
+      name: "Boom Equalizer"
+      match: "^https://apimboom2\\.globaldelight\\.net/itunesreceipt_v2\\.php$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+      timeout: 30
+  # 📅 Fantastical Premium (yfamilys)
+  - http_response:
+      name: "Fantastical Premium"
+      match: "^https://api\\.flexibits\\.com/(v1/auth/device|v1/account/details)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📝 Craft Premium (yfamilys)
+  - http_response:
+      name: "Craft Premium"
+      match: "^https://api\\.craft\\.do/auth/v2/profile"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📓 Day One Premium (yfamilys)
+  - http_response:
+      name: "Day One Premium"
+      match: "^https?://dayone\\.app/api/v2/users/(receipt|account-status)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 💬 Nicegram Premium (yfamilys)
+  - http_request:
+      name: "Nicegram Premium"
+      match: "^https?://restore-access\\.indream\\.app/restoreAccess\\?id=\\w+$"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      timeout: 30
+  # 📄 iLovePDF Premium (yfamilys)
+  - http_response:
+      name: "iLovePDF Premium"
+      match: "^https?://service\\.ilovepdf\\.com/v1/user"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🌐 Mondly Premium (yfamilys)
+  - http_response:
+      name: "Mondly Premium"
+      match: "^https://api\\.mondlylanguages\\.com/v3/ios/user/sync"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🌐 Memrise Premium (yfamilys)
+  - http_response:
+      name: "Memrise Premium"
+      match: "^https://api\\.memrise\\.com/v1\\.18"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🌐 Aloha Browser (yfamilys)
+  - http_response:
+      name: "Aloha Browser"
+      match: "^https?://api\\.alohaprofile\\.com/v1/profile_info"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🧘 Daily Yoga (yfamilys)
+  - http_response:
+      name: "Daily Yoga"
+      match: "^https?://pre\\.dailyyoga\\.com/h2oapi/user/getUserDetail"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🌤 AccuWeather (yfamilys)
+  - http_response:
+      name: "AccuWeather Premium"
+      match: "^https?://app-subscription-proxy\\.accuweather\\.com/subscriptions/v1/apple/validate"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 😴 Endel (yfamilys)
+  - http_response:
+      name: "Endel Focus"
+      match: "^https://api-production\\.endel\\.io/v4/call"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📝 Flomo (yfamilys)
+  - http_response:
+      name: "Flomo Notes"
+      match: "^https://flomoapp\\.com/api/v1/user/me"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # ✍ Drafts Pro (yfamilys)
+  - http_response:
+      name: "Drafts Pro"
+      match: "^https://backend\\.getdrafts\\.com/api/v1/verification/verify_receipt"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 💪 Keep Fitness (yfamilys)
+  - http_response:
+      name: "Keep Fitness"
+      match: "^https://api\\.gotokeep\\.com"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🎨 Color Widgets → Đã gộp vào revenuecat_multi.js (generic fallback). Gỡ script riêng để tránh xung đột hostname với Locket Gold.
+
+  # === iTRANSLATE PRO (dịch thuật) - 89996462 ===
+  - http_request:
+      name: "iTranslate Pro"
+      match: "^https://ssl-api\\.itranslateapp\\.com/accounts/v\\d/subscriptions/verify/ios"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # === LINGVIST HỌC NGOẠI NGỮ - 89996462 ===
+  - http_response:
+      name: "Lingvist"
+      match: "^https://payment-api\\.lingvist\\.com/.+/user/services"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # === BENDING SPOONS BUNDLE (Splice, Remini, FilmicPro, Focos, 30DayFitness...) - 89996462 ===
+  - http_response:
+      name: "Bending Spoons Bundle"
+      match: "^https?://.*\\.oracle\\.bendingspoonsapps\\.com/v\\d/(users/.+|purchases/verify)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+
+  # === ADOBE SCAN (PDF Scanner) - Marol62926 ✅ VERIFIED ===
+  - http_response:
+      name: "Adobe Scan"
+      match: "^https?://lcs-mobile-cops\\.adobe\\.io/(?!mobile_profile).+"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # === BILIBILI (CN Video Platform) - Marol62926 ✅ VERIFIED ===
+  - http_response:
+      name: "Bilibili"
+      match: "^https?://app\\.bilibili\\.com/x/v2/account/myinfo"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 🎬 InVideo Premium
+  - http_response:
+      name: "InVideo Premium"
+      match: "^https?://payments\\.invideo\\.io/(verify_purchase|subscription)"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📅 Agenda Premium
+  - http_response:
+      name: "Agenda Premium"
+      match: "^https://accounts\\.agenda\\.com/users/.*/license"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📕 PDF Expert - Readdle (host riêng)
+  - http_request:
+      name: "PDF Expert"
+      match: "^https://license\\.pdfexpert\\.com/api/2\\.0/pdfexpert6/subscription/refresh"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📁 Documents by Readdle
+  - http_request:
+      name: "Documents by Readdle"
+      match: "^https://license\\.pdfexpert\\.com/api/2\\.0/documents/subscription/refresh"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+  # 📆 Sorted Calendar/Planner
+  - http_response:
+      name: "Sorted Planner"
+      match: "^https://api\\.sortedapp\\.com/receipts/verify"
+      script_url: "https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js"
+      body_required: true
+      timeout: 30
+mitm:
+  hostnames:
+    - "pool.elsanow.io"
+    - "mobile-api.adguard.org"
+    - "*.grammarly.com"
+    - "sub.store"
+    - "*.googlevideo.com"
+    - "youtubei.googleapis.com"
+    - "www.youtube.com"
+    - "s.youtube.com"
+    - "spclient.wg.spotify.com"
+    - "*-spclient.spotify.com"
+    - "gads.current.spotify.com"
+    - "api.spotify.com"
+    - "api.revenuecat.com"
+    - "api.rc-backup.com"
+    - "buy.itunes.apple.com"
+    - "api.picsart.com"
+    - "api.picsart.cn"
+    - "api.meiease.com"
+    - "api.meiease.cn"
+    - "api-mobile.soundcloud.com"
+    - "mb3admin.com"
+    - "api-account.kinemasters.com"
+    - "photos.adobe.io"
+    - "lcs-mobile-cops.adobe.io"
+    - "app.algoriddim.com"
+    - "api.calm.com"
+    - "api.busuu.com"
+    - "api.prod.headspace.com"
+    - "vsco.co"
+    - "api.funimate.com"
+    - "us-central1-alight-creative.cloudfunctions.net"
+    - "api-sub.meitu.com"
+    - "premium-*.truecaller.com"
+    - "*.intsig.net"
+    - "api.mr.pixocial.com"
+    - "newbeee-api.beautyplus.com"
+    - "user-snow-api.snow.me"
+    - "user-kaji-api.b612kaji.com"
+    - "h5.xiuxiu.meitu.com"
+    - "api.xiuxiu.meitu.com"
+    - "account.wps.cn"
+    - "*.account.wps.com"
+    - "www.xmind.cn"
+    - "www.xmind.net"
+    - "www.xmind.app"
+    - "ars.alar.my"
+    - "subscription.grammarly.com"
+    - "notability.com"
+    - "lapi.photomath.net"
+    - "pro.smallpdf.com"
+    - "billing.peakcloud.org"
+    - "api.polaxiong.com"
+    - "premium-api.myfitnesspal.com"
+    - "apic.musixmatch.com"
+    - "server.yoyiapp.com"
+    - "mid.zineapi.com"
+    - "apimboom2.globaldelight.net"
+    - "api.flexibits.com"
+    - "api.craft.do"
+    - "dayone.app"
+    - "restore-access.indream.app"
+    - "service.ilovepdf.com"
+    - "api.mondlylanguages.com"
+    - "api.memrise.com"
+    - "api.alohaprofile.com"
+    - "pre.dailyyoga.com"
+    - "app-subscription-proxy.accuweather.com"
+    - "api-production.endel.io"
+    - "flomoapp.com"
+    - "backend.getdrafts.com"
+    - "api.gotokeep.com"
+    - "payments.invideo.io"
+    - "ssl-api.itranslateapp.com"
+    - "payment-api.lingvist.com"
+    - "*.oracle.bendingspoonsapps.com"
+    - "app.bilibili.com"
+    - "accounts.agenda.com"
+    - "license.pdfexpert.com"
+    - "api.sortedapp.com"
+    - "api.duolingo.com"
+    - "ios-api-cdn.duolingo.com"
+    - "api.mycake.me"
+    - "quizlet.com"
+    - "v1.darkroom.co"
+    - "com.zijayrate.analogcam"
+    - "api.elsaspeak.com"
+    - "api.photoroom.com"
+    - "api.remini.ai"
+    - "api.bazaart.me"
+    - "firebaseremoteconfig.googleapis.com"
+    - "api.rophim1.vip"
+    - "rophimapi.net"

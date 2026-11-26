@@ -1,0 +1,1769 @@
+name: ⚡ Anh Tú Premium - Stash
+desc: "🚀 Mở khóa 350+ App VIP (Locket Gold 2099 + 35 Bộ Lọc Camera VIP, Video 60s, Spotify, YouTube, Captions AI, iScreen, MD Vinyl, Moises, Structured, Remini, PhotoRoom, ELSA, OldRoll, iTunes 250+). 🛡️ Chặn Ads & Tracking. 🎮 Gaming DIRECT. 📺 Streaming PROXY. ⚡ Tối ưu DNS, Banking, GeoIP VN & Privacy. | v3.2.5-apex (2026-10-30)"
+author: Nguyễn Ngọc Anh Tú
+homepage: https://github.com/K4Z3X0R/NguyenNgocAnhTu
+icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+
+rules:
+  # --- Block iOS OTA Updates (Triệt để) ---
+  - DOMAIN,mesu.apple.com,REJECT
+  - DOMAIN,gdmf.apple.com,REJECT
+  - DOMAIN,updates-http.apple.com,REJECT
+  - DOMAIN,appldnld.apple.com,REJECT
+  - DOMAIN,swcdn.apple.com,REJECT
+  - DOMAIN,xp.apple.com,REJECT
+  # --- Block App Store Search Ads ---
+  - DOMAIN,searchads.apple.com,REJECT
+  - DOMAIN,iad.apple.com,REJECT
+  - DOMAIN,iadsdk.apple.com,REJECT
+  # === BLOCK QUIC FOR YOUTUBE & SPOTIFY & LOCKET MITM ===
+  - AND,((DOMAIN-SUFFIX,googlevideo.com),(NETWORK,UDP)),REJECT
+  - AND,((DOMAIN,youtubei.googleapis.com),(NETWORK,UDP)),REJECT
+  - AND,((DOMAIN,www.youtube.com),(NETWORK,UDP)),REJECT
+  - AND,((DOMAIN,firebaseremoteconfig.googleapis.com),(NETWORK,UDP)),REJECT
+  - AND,((DOMAIN-KEYWORD,spotify),(NETWORK,UDP)),REJECT
+
+  # === BLOCK WEBRTC LEAK (Specific servers) ===
+  # Note: Generic KEYWORD stun/turn removed — breaks VoIP (FaceTime, WhatsApp, Zoom)
+  - DOMAIN-SUFFIX,stun.l.google.com,REJECT
+  - DOMAIN-SUFFIX,stun1.l.google.com,REJECT
+  - DOMAIN-SUFFIX,stun2.l.google.com,REJECT
+  - DOMAIN-SUFFIX,stun3.l.google.com,REJECT
+  - DOMAIN-SUFFIX,stun4.l.google.com,REJECT
+
+  # === BLOCK SPOTIFY ADS & TRACKERS 100% ===
+  # Note: audio-ak and heads-ak must be DIRECT to stream audio smoothly
+  - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,audio-fa.scdn.co,REJECT
+  - DOMAIN,spclient.wg.spotify.com,DIRECT
+  - DOMAIN,api.spotify.com,DIRECT
+  # === ZERO LOGIN FAILURE (SPOTIFY, GOOGLE, FIREBASE & APPLE ID) ===
+  - DOMAIN-SUFFIX,dealer.spotify.com,DIRECT
+  - DOMAIN-SUFFIX,login.spotify.com,DIRECT
+  - DOMAIN,accounts.google.com,DIRECT
+  - DOMAIN,accounts.youtube.com,DIRECT
+  - DOMAIN,oauth2.googleapis.com,DIRECT
+  - DOMAIN,passkeys.google.com,DIRECT
+  - DOMAIN,identitytoolkit.googleapis.com,DIRECT
+  - DOMAIN,securetoken.googleapis.com,DIRECT
+  - DOMAIN,appleid.apple.com,DIRECT
+  - DOMAIN-KEYWORD,spotify-ads,REJECT
+  - DOMAIN-SUFFIX,ads-fa.spotify.com,REJECT
+  - DOMAIN-SUFFIX,analytics.spotify.com,REJECT
+  - DOMAIN-SUFFIX,adeventtracker.spotify.com,REJECT
+  - DOMAIN-SUFFIX,log.spotify.com,REJECT
+  - DOMAIN-SUFFIX,creativeservice-production.scdn.co,REJECT
+  - DOMAIN-SUFFIX,gads.current.spotify.com,REJECT
+  # === BLOCK SPOTIFY PODCAST ADS & CANVAS (v2.8.0) ===
+  - DOMAIN,audio-sp-sto.pscdn.co,REJECT
+  - DOMAIN,audio-sp-ash.pscdn.co,REJECT
+  - DOMAIN,audio-sp-dca.pscdn.co,REJECT
+  - DOMAIN,audio-sp-lon.pscdn.co,REJECT
+  - DOMAIN,podcastads.spotify.com,REJECT
+
+  # ===========================================================
+  # === CHáº¶N QUáº¢NG CÃO + Cá»œ Báº C/CÃ Äá»˜ Tá»”NG Há»¢P (Ad Block) ===
+  # === by z3rokaze - 2026-05-27 (Ultimate Edition)            ===
+  # ===========================================================
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 1: CHáº¶N QUáº¢NG CÃO (AD BLOCK) â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 1.1 Google Ads / AdMob / DoubleClick ---
+  - DOMAIN-SUFFIX,adservice.google.com,REJECT
+  - DOMAIN-SUFFIX,adservice.google.com.vn,REJECT
+  - DOMAIN-SUFFIX,admob.com,REJECT
+  - DOMAIN-SUFFIX,app-measurement.com,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,ads.google.com,REJECT
+  - DOMAIN-SUFFIX,pagead-googlehosted.l.google.com,REJECT
+  - DOMAIN-SUFFIX,googletagmanager.com,REJECT
+  - DOMAIN-KEYWORD,googleads,REJECT
+  - DOMAIN-KEYWORD,google-analytics,REJECT
+
+  # --- 1.2 Facebook / Meta Ads ---
+  - DOMAIN-SUFFIX,an.facebook.com,REJECT
+  - DOMAIN-SUFFIX,ads.facebook.com,REJECT
+  - DOMAIN-SUFFIX,adtago.s3.amazonaws.com,REJECT
+  - DOMAIN-SUFFIX,pixel.facebook.com,REJECT
+
+  # --- 1.3 Unity Ads ---
+  - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
+  - DOMAIN-SUFFIX,ads.unity3d.com,REJECT
+  - DOMAIN-KEYWORD,unityads,REJECT
+
+  # --- 1.4 AppLovin / MAX ---
+  - DOMAIN-SUFFIX,applovin.com,REJECT
+  - DOMAIN-SUFFIX,applvn.com,REJECT
+  - DOMAIN-KEYWORD,applovin,REJECT
+
+  # --- 1.5 IronSource / LevelPlay ---
+  - DOMAIN-SUFFIX,ironsrc.com,REJECT
+  - DOMAIN-SUFFIX,supersonicads.com,REJECT
+  - DOMAIN-KEYWORD,ironsource,REJECT
+
+  # --- 1.6 Vungle / Liftoff ---
+  - DOMAIN-SUFFIX,vungle.com,REJECT
+  - DOMAIN-SUFFIX,liftoff.io,REJECT
+  - DOMAIN-KEYWORD,vungle,REJECT
+
+  # --- 1.7 Chartboost ---
+  - DOMAIN-SUFFIX,chartboost.com,REJECT
+  - DOMAIN-KEYWORD,chartboost,REJECT
+
+  # --- 1.8 InMobi ---
+  - DOMAIN-SUFFIX,inmobi.com,REJECT
+  - DOMAIN-KEYWORD,inmobi,REJECT
+
+  # --- 1.9 Mintegral / Mobvista ---
+  - DOMAIN-SUFFIX,mintegral.com,REJECT
+  - DOMAIN-SUFFIX,rayjump.com,REJECT
+  - DOMAIN-SUFFIX,mobvista.com,REJECT
+  - DOMAIN-KEYWORD,mintegral,REJECT
+
+  # --- 1.10 AdColony / Digital Turbine ---
+  - DOMAIN-SUFFIX,adcolony.com,REJECT
+  - DOMAIN-SUFFIX,digitalturbine.com,REJECT
+  - DOMAIN-KEYWORD,adcolony,REJECT
+
+  # --- 1.11 MoPub (Twitter) ---
+  - DOMAIN-SUFFIX,mopub.com,REJECT
+  - DOMAIN-KEYWORD,mopub,REJECT
+
+  # --- 1.12 Fyber / Digital Turbine ---
+  - DOMAIN-SUFFIX,fyber.com,REJECT
+  - DOMAIN-SUFFIX,inner-active.mobi,REJECT
+
+  # --- 1.13 Smaato ---
+  - DOMAIN-SUFFIX,smaato.com,REJECT
+  - DOMAIN-SUFFIX,smaato.net,REJECT
+
+  # --- 1.14 Tapjoy ---
+  - DOMAIN-SUFFIX,tapjoy.com,REJECT
+  - DOMAIN-KEYWORD,tapjoy,REJECT
+
+  # --- 1.15 Pangle (TikTok Ads / ByteDance) ---
+  - DOMAIN-SUFFIX,pangleglobal.com,REJECT
+  - DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT
+  # DOMAIN-SUFFIX,byteimg.com,REJECT # Disabled: blocks TikTok images/videos
+  - DOMAIN-KEYWORD,pangleglobal,REJECT
+
+  # --- 1.16 Amazon Ads ---
+  - DOMAIN-SUFFIX,amazon-adsystem.com,REJECT
+  - DOMAIN-SUFFIX,aan.amazon.com,REJECT
+
+  # --- 1.17 StartApp / Start.io ---
+  - DOMAIN-SUFFIX,startapp.com,REJECT
+  - DOMAIN-SUFFIX,start.io,REJECT
+  - DOMAIN-KEYWORD,startapp,REJECT
+
+  # --- 1.18 Ogury ---
+  - DOMAIN-SUFFIX,ogury.com,REJECT
+
+  # --- 1.19 Yahoo / Flurry ---
+  - DOMAIN-SUFFIX,flurry.com,REJECT
+  - DOMAIN-SUFFIX,ads.yahoo.com,REJECT
+  - DOMAIN-SUFFIX,analytics.yahoo.com,REJECT
+
+  # --- 1.20 Criteo ---
+  - DOMAIN-SUFFIX,criteo.com,REJECT
+  - DOMAIN-SUFFIX,criteo.net,REJECT
+  - DOMAIN-SUFFIX,emailretargeting.com,REJECT
+
+  # --- 1.21 Teads (Video Ads) ---
+  - DOMAIN-SUFFIX,teads.tv,REJECT
+  - DOMAIN-SUFFIX,teads.com,REJECT
+
+  # --- 1.22 PubMatic ---
+  - DOMAIN-SUFFIX,pubmatic.com,REJECT
+
+  # --- 1.23 OpenX ---
+  - DOMAIN-SUFFIX,openx.net,REJECT
+  - DOMAIN-SUFFIX,openx.com,REJECT
+
+  # --- 1.24 Index Exchange ---
+  - DOMAIN-SUFFIX,casalemedia.com,REJECT
+
+  # --- 1.25 SmartAdServer ---
+  - DOMAIN-SUFFIX,smartadserver.com,REJECT
+  - DOMAIN-SUFFIX,sascdn.com,REJECT
+
+  # --- 1.26 AdRoll ---
+  - DOMAIN-SUFFIX,adroll.com,REJECT
+
+  # --- 1.27 Media.net ---
+  - DOMAIN-SUFFIX,media.net,REJECT
+
+  # --- 1.28 RevContent / MGID / Content Ads ---
+  - DOMAIN-SUFFIX,revcontent.com,REJECT
+  - DOMAIN-SUFFIX,mgid.com,REJECT
+  - DOMAIN-SUFFIX,contentad.net,REJECT
+
+  # --- 1.29 ShareThrough / TripleLift / Nativo ---
+  - DOMAIN-SUFFIX,sharethrough.com,REJECT
+  - DOMAIN-SUFFIX,triplelift.com,REJECT
+  - DOMAIN-SUFFIX,nativo.com,REJECT
+
+  # --- 1.30 Yandex Ads ---
+  - DOMAIN-SUFFIX,an.yandex.ru,REJECT
+  - DOMAIN-SUFFIX,yandexadexchange.net,REJECT
+
+  # --- 1.31 Baidu / Tencent Ads ---
+  - DOMAIN-SUFFIX,pos.baidu.com,REJECT
+  - DOMAIN-SUFFIX,cpro.baidu.com,REJECT
+  - DOMAIN-SUFFIX,e.qq.com,REJECT
+  - DOMAIN-SUFFIX,gdt.qq.com,REJECT
+
+  # --- 1.32 Ad Verification / Viewability ---
+  - DOMAIN-SUFFIX,moat.com,REJECT
+  - DOMAIN-SUFFIX,moatads.com,REJECT
+  - DOMAIN-SUFFIX,doubleverify.com,REJECT
+  - DOMAIN-SUFFIX,integralads.com,REJECT
+  - DOMAIN-SUFFIX,adsafeprotected.com,REJECT
+
+  # --- 1.33 TikTok Ads ---
+  - DOMAIN-SUFFIX,ads.tiktok.com,REJECT
+  - DOMAIN-SUFFIX,analytics.tiktok.com,REJECT
+  - DOMAIN-SUFFIX,ct.tiktok.com,REJECT
+  # DOMAIN-KEYWORD,bytedance,REJECT  # Disabled: too broad, blocks CapCut, TikTok, Lark
+
+  # --- 1.34 Additional Ad Networks ---
+  - DOMAIN-SUFFIX,adform.net,REJECT
+  - DOMAIN-SUFFIX,adnxs.com,REJECT
+  - DOMAIN-SUFFIX,adzerk.net,REJECT
+  - DOMAIN-SUFFIX,adtech.com,REJECT
+  - DOMAIN-SUFFIX,adition.com,REJECT
+  - DOMAIN-SUFFIX,adzerk.com,REJECT
+
+  # --- 1.35 New Ad Networks (2025-2026) ---
+  - DOMAIN-SUFFIX,verve.com,REJECT
+  - DOMAIN-SUFFIX,pubnative.net,REJECT
+  - DOMAIN-SUFFIX,appmetrica.yandex.com,REJECT
+  - DOMAIN-SUFFIX,report.appmetrica.yandex.net,REJECT
+  - DOMAIN-SUFFIX,moloco.com,REJECT
+  - DOMAIN-KEYWORD,moloco,REJECT
+  - DOMAIN-SUFFIX,bigoads.com,REJECT
+  - DOMAIN-SUFFIX,ad.xiaomi.com,REJECT
+  # --- 1.36 Ad Networks (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,bidmachine.io,REJECT
+  - DOMAIN-SUFFIX,bidease.com,REJECT
+  - DOMAIN-SUFFIX,prebid.org,REJECT
+  - DOMAIN-SUFFIX,prebid.com,REJECT
+  - DOMAIN-SUFFIX,gumgum.com,REJECT
+  - DOMAIN-SUFFIX,smartyads.com,REJECT
+  - DOMAIN-SUFFIX,loopme.com,REJECT
+  - DOMAIN-SUFFIX,kidoz.net,REJECT
+  - DOMAIN-SUFFIX,yieldmo.com,REJECT
+  - DOMAIN-SUFFIX,zeotap.com,REJECT
+  - DOMAIN-SUFFIX,id5-sync.com,REJECT
+  - DOMAIN-SUFFIX,adsmoloco.com,REJECT
+  - DOMAIN-SUFFIX,a-mo.net,REJECT
+  - DOMAIN-SUFFIX,adtarget.com.tr,REJECT
+  - DOMAIN-SUFFIX,vidoomy.com,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 2: TRACKING & ANALYTICS SDKs  â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 2.1 Attribution / Mobile Measurement ---
+  - DOMAIN-SUFFIX,adjust.com,REJECT
+  - DOMAIN-SUFFIX,adjust.io,REJECT
+  - DOMAIN-SUFFIX,appsflyer.com,REJECT
+  - DOMAIN-SUFFIX,kochava.com,REJECT
+  - DOMAIN-SUFFIX,singular.net,REJECT
+  - DOMAIN-SUFFIX,tenjin.com,REJECT
+  - DOMAIN-SUFFIX,airbridge.io,REJECT
+
+  # --- 2.2 Analytics Platforms ---
+  - DOMAIN-SUFFIX,mixpanel.com,REJECT
+  - DOMAIN-SUFFIX,amplitude.com,REJECT
+  - DOMAIN-SUFFIX,segment.io,REJECT
+  - DOMAIN-SUFFIX,segment.com,REJECT
+  - DOMAIN-SUFFIX,heapanalytics.com,REJECT
+  - DOMAIN-SUFFIX,fullstory.com,REJECT
+  - DOMAIN-SUFFIX,hotjar.com,REJECT
+  - DOMAIN-SUFFIX,mouseflow.com,REJECT
+  - DOMAIN-SUFFIX,crazyegg.com,REJECT
+  - DOMAIN-SUFFIX,kissmetrics.com,REJECT
+
+  # --- 2.3 General Web Tracking ---
+  - DOMAIN-SUFFIX,scorecardresearch.com,REJECT
+  - DOMAIN-SUFFIX,omtrdc.net,REJECT
+  - DOMAIN-SUFFIX,demdex.net,REJECT
+  - DOMAIN-SUFFIX,adsrvr.org,REJECT
+  # DOMAIN-SUFFIX,firebase.com,REJECT  # Disabled: breaks push notifications & auth
+  - DOMAIN-SUFFIX,crashlytics.com,REJECT
+  - DOMAIN-SUFFIX,braze.com,REJECT
+  - DOMAIN-SUFFIX,clevertap.com,REJECT
+  - DOMAIN-SUFFIX,intercom.com,REJECT
+  - DOMAIN-SUFFIX,mookie1.com,REJECT
+  - DOMAIN-SUFFIX,taboola.com,REJECT
+  - DOMAIN-SUFFIX,outbrain.com,REJECT
+  - DOMAIN-SUFFIX,bluekai.com,REJECT
+  - DOMAIN-SUFFIX,everesttech.net,REJECT
+  - DOMAIN-SUFFIX,mathtag.com,REJECT
+  - DOMAIN-SUFFIX,bidswitch.net,REJECT
+  - DOMAIN-SUFFIX,exelator.com,REJECT
+  - DOMAIN-SUFFIX,crwdcntrl.net,REJECT
+  - DOMAIN-SUFFIX,dotomi.com,REJECT
+  - DOMAIN-SUFFIX,serving-sys.com,REJECT
+  - DOMAIN-SUFFIX,eyeota.net,REJECT
+  - DOMAIN-SUFFIX,agkn.com,REJECT
+  - DOMAIN-SUFFIX,rlcdn.com,REJECT
+  - DOMAIN-SUFFIX,turn.com,REJECT
+  - DOMAIN-SUFFIX,rubiconproject.com,REJECT
+  - DOMAIN-SUFFIX,contextweb.com,REJECT
+  - DOMAIN-SUFFIX,spotxchange.com,REJECT
+  # --- 2.4 Tracking (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,sentry.io,REJECT
+  - DOMAIN-SUFFIX,bugsnag.com,REJECT
+  - DOMAIN-SUFFIX,instabug.com,REJECT
+  - DOMAIN-SUFFIX,embrace.io,REJECT
+  - DOMAIN-SUFFIX,datadoghq.com,REJECT
+  - DOMAIN-SUFFIX,nr-data.net,REJECT
+  - DOMAIN-SUFFIX,newrelic.com,REJECT
+  - DOMAIN-SUFFIX,posthog.com,REJECT
+  - DOMAIN-SUFFIX,rudderstack.com,REJECT
+  - DOMAIN-SUFFIX,smartlook.com,REJECT
+  - DOMAIN-SUFFIX,quantcast.com,REJECT
+  - DOMAIN-SUFFIX,permutive.com,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 3: QUáº¢NG CÃO VIá»†T NAM        â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  - DOMAIN-SUFFIX,adservice.zaloapp.com,REJECT
+  # DOMAIN-KEYWORD,zaloapp.com/ads,REJECT  # Disabled: DOMAIN-KEYWORD cannot match URL path
+  - DOMAIN-SUFFIX,admicro.vn,REJECT
+  - DOMAIN-SUFFIX,adsplay.net,REJECT
+  - DOMAIN-SUFFIX,adtima.vn,REJECT
+  - DOMAIN-SUFFIX,eclick.vn,REJECT
+  - DOMAIN-SUFFIX,novaon.vn,REJECT
+  - DOMAIN-SUFFIX,nativex.vn,REJECT
+  - DOMAIN-SUFFIX,adpia.vn,REJECT
+  - DOMAIN-SUFFIX,ants.vn,REJECT
+  - DOMAIN-SUFFIX,accesstrade.vn,REJECT
+  - DOMAIN-SUFFIX,younetmedia.com,REJECT
+  # --- 3.1 VN Ads (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,vcmedia.vn,REJECT
+  - DOMAIN-SUFFIX,goada.vn,REJECT
+  - DOMAIN-SUFFIX,adnetwork.vn,REJECT
+  - DOMAIN-SUFFIX,mcads.vn,REJECT
+  - DOMAIN-SUFFIX,blueseed.tv,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 4: POPUP / REDIRECT / SCAM    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  - DOMAIN-SUFFIX,popads.net,REJECT
+  - DOMAIN-SUFFIX,popcash.net,REJECT
+  - DOMAIN-SUFFIX,propellerads.com,REJECT
+  - DOMAIN-SUFFIX,propellerclick.com,REJECT
+  - DOMAIN-SUFFIX,trafficjunky.com,REJECT
+  - DOMAIN-SUFFIX,revenuehits.com,REJECT
+  - DOMAIN-SUFFIX,exoclick.com,REJECT
+  - DOMAIN-SUFFIX,clickadu.com,REJECT
+  - DOMAIN-SUFFIX,hilltopads.com,REJECT
+  - DOMAIN-SUFFIX,richpush.com,REJECT
+  - DOMAIN-SUFFIX,pushengage.com,REJECT
+  - DOMAIN-SUFFIX,adsterra.com,REJECT
+  - DOMAIN-SUFFIX,adsterratools.com,REJECT
+  - DOMAIN-SUFFIX,trafficstars.com,REJECT
+  - DOMAIN-SUFFIX,juicyads.com,REJECT
+  - DOMAIN-SUFFIX,trafficfactory.biz,REJECT
+  - DOMAIN-SUFFIX,clickaine.com,REJECT
+  - DOMAIN-SUFFIX,evadav.com,REJECT
+  - DOMAIN-SUFFIX,galaksion.com,REJECT
+  - DOMAIN-SUFFIX,onclickmx.com,REJECT
+  # --- 4.1 Popup/Malvertising (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,adcash.com,REJECT
+  - DOMAIN-SUFFIX,mgcash.com,REJECT
+  - DOMAIN-SUFFIX,popunder.net,REJECT
+  - DOMAIN-SUFFIX,admaven.com,REJECT
+  - DOMAIN-SUFFIX,ad-maven.com,REJECT
+  - DOMAIN-SUFFIX,pushwhy.com,REJECT
+  - DOMAIN-SUFFIX,push-house.com,REJECT
+  - DOMAIN-SUFFIX,partner.pushhouse.com,REJECT
+  - DOMAIN-SUFFIX,datsprings.com,REJECT
+  - DOMAIN-SUFFIX,zeydoo.com,REJECT
+  - DOMAIN-SUFFIX,propu.sh,REJECT
+  - DOMAIN-SUFFIX,vignatti.com,REJECT
+  - DOMAIN-SUFFIX,mybetterdl.com,REJECT
+  - DOMAIN-SUFFIX,clickfuse.com,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 5: CHáº¶N WEB CÃ Äá»˜ / Cá»œ Báº C / CASINO (GAMBLING)  â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 5.1 CÃ¡ Ä‘á»™ / Cá» báº¡c phá»• biáº¿n táº¡i Viá»‡t Nam ---
+  - DOMAIN-SUFFIX,1xbet.com,REJECT
+  - DOMAIN-SUFFIX,1xbet.vn,REJECT
+  - DOMAIN-SUFFIX,fun88.com,REJECT
+  - DOMAIN-SUFFIX,fun88asia.com,REJECT
+  - DOMAIN-SUFFIX,fun88vietnam.com,REJECT
+  - DOMAIN-SUFFIX,w88.com,REJECT
+  - DOMAIN-SUFFIX,w88vn.com,REJECT
+  - DOMAIN-SUFFIX,w88top.com,REJECT
+  - DOMAIN-SUFFIX,188bet.com,REJECT
+  - DOMAIN-SUFFIX,188betasia.com,REJECT
+  - DOMAIN-SUFFIX,m88.com,REJECT
+  - DOMAIN-SUFFIX,m88a.com,REJECT
+  - DOMAIN-SUFFIX,m88vn.com,REJECT
+  - DOMAIN-SUFFIX,bk8.com,REJECT
+  - DOMAIN-SUFFIX,bk8vn.com,REJECT
+  - DOMAIN-SUFFIX,fb88.com,REJECT
+  - DOMAIN-SUFFIX,fb88vn.com,REJECT
+  - DOMAIN-SUFFIX,sv388.com,REJECT
+  - DOMAIN-SUFFIX,sv388vn.com,REJECT
+  - DOMAIN-SUFFIX,sin88.com,REJECT
+  - DOMAIN-SUFFIX,sin88.club,REJECT
+  - DOMAIN-SUFFIX,hi88.com,REJECT
+  - DOMAIN-SUFFIX,hi88.bio,REJECT
+  - DOMAIN-SUFFIX,hi88.club,REJECT
+  - DOMAIN-SUFFIX,new88.com,REJECT
+  - DOMAIN-SUFFIX,new88.club,REJECT
+  - DOMAIN-SUFFIX,new88vn.com,REJECT
+  - DOMAIN-SUFFIX,8xbet.com,REJECT
+  - DOMAIN-SUFFIX,8xbet.gg,REJECT
+  - DOMAIN-SUFFIX,jun88.com,REJECT
+  - DOMAIN-SUFFIX,jun88.bio,REJECT
+  - DOMAIN-SUFFIX,jun88.club,REJECT
+  - DOMAIN-SUFFIX,vn88.com,REJECT
+  - DOMAIN-SUFFIX,vn88.club,REJECT
+  - DOMAIN-SUFFIX,789bet.com,REJECT
+  - DOMAIN-SUFFIX,789bet.gg,REJECT
+  - DOMAIN-SUFFIX,789bet.club,REJECT
+  - DOMAIN-SUFFIX,kubet.com,REJECT
+  - DOMAIN-SUFFIX,kubet.io,REJECT
+  - DOMAIN-SUFFIX,kubet.club,REJECT
+  - DOMAIN-SUFFIX,sobet.io,REJECT
+  - DOMAIN-SUFFIX,sunwin.com,REJECT
+  - DOMAIN-SUFFIX,sunwin.club,REJECT
+  - DOMAIN-SUFFIX,sunwin.gg,REJECT
+  - DOMAIN-SUFFIX,iwin.com,REJECT
+  - DOMAIN-SUFFIX,iwin.club,REJECT
+  - DOMAIN-SUFFIX,iwin68.club,REJECT
+  - DOMAIN-SUFFIX,go88.com,REJECT
+  - DOMAIN-SUFFIX,go88.club,REJECT
+  - DOMAIN-SUFFIX,go88.gg,REJECT
+  - DOMAIN-SUFFIX,rikvip.com,REJECT
+  - DOMAIN-SUFFIX,rikvip.club,REJECT
+  - DOMAIN-SUFFIX,rik.vip,REJECT
+  - DOMAIN-SUFFIX,8day.com,REJECT
+  - DOMAIN-SUFFIX,8day.club,REJECT
+  - DOMAIN-SUFFIX,ta88.com,REJECT
+  - DOMAIN-SUFFIX,ta88.club,REJECT
+  - DOMAIN-SUFFIX,tf88.com,REJECT
+  - DOMAIN-SUFFIX,shbet.com,REJECT
+  - DOMAIN-SUFFIX,shbet.club,REJECT
+  - DOMAIN-SUFFIX,luck8.com,REJECT
+  - DOMAIN-SUFFIX,luck8.club,REJECT
+  - DOMAIN-SUFFIX,mb66.com,REJECT
+  - DOMAIN-SUFFIX,mb66.club,REJECT
+  - DOMAIN-SUFFIX,five88.com,REJECT
+  - DOMAIN-SUFFIX,five88.gg,REJECT
+  - DOMAIN-SUFFIX,zbet.com,REJECT
+  - DOMAIN-SUFFIX,zbet.club,REJECT
+  - DOMAIN-SUFFIX,oxbet.com,REJECT
+  - DOMAIN-SUFFIX,oxbet.club,REJECT
+  - DOMAIN-SUFFIX,ae888.com,REJECT
+  - DOMAIN-SUFFIX,ae888.club,REJECT
+  - DOMAIN-SUFFIX,taya365.com,REJECT
+  - DOMAIN-SUFFIX,taya365.club,REJECT
+  - DOMAIN-SUFFIX,66bet.com,REJECT
+  - DOMAIN-SUFFIX,77bet.com,REJECT
+  - DOMAIN-SUFFIX,33win.com,REJECT
+  - DOMAIN-SUFFIX,33win.club,REJECT
+  - DOMAIN-SUFFIX,f8bet.com,REJECT
+  - DOMAIN-SUFFIX,f8bet.club,REJECT
+  - DOMAIN-SUFFIX,bet88.com,REJECT
+  - DOMAIN-SUFFIX,bet88.club,REJECT
+  - DOMAIN-SUFFIX,qh88.com,REJECT
+  - DOMAIN-SUFFIX,qh88.club,REJECT
+  - DOMAIN-SUFFIX,78win.com,REJECT
+  - DOMAIN-SUFFIX,78win.club,REJECT
+  - DOMAIN-SUFFIX,abc8.com,REJECT
+  - DOMAIN-SUFFIX,abc8.club,REJECT
+  - DOMAIN-SUFFIX,debet.com,REJECT
+  - DOMAIN-SUFFIX,debet.club,REJECT
+  - DOMAIN-SUFFIX,mu88.com,REJECT
+  - DOMAIN-SUFFIX,mu88.club,REJECT
+  - DOMAIN-SUFFIX,gg8.com,REJECT
+  - DOMAIN-SUFFIX,gg8.club,REJECT
+  - DOMAIN-SUFFIX,b52.club,REJECT
+  - DOMAIN-SUFFIX,uy88.com,REJECT
+  - DOMAIN-SUFFIX,top88.com,REJECT
+  - DOMAIN-SUFFIX,top88.club,REJECT
+  - DOMAIN-SUFFIX,betvisa.com,REJECT
+  - DOMAIN-SUFFIX,betvisa.vn,REJECT
+  - DOMAIN-SUFFIX,bong88.com,REJECT
+  - DOMAIN-SUFFIX,bong88.net,REJECT
+
+  # --- 5.2 Trang cÃ¡ Ä‘á»™ quá»‘c táº¿ ---
+  - DOMAIN-SUFFIX,bet365.com,REJECT
+  - DOMAIN-SUFFIX,22bet.com,REJECT
+  - DOMAIN-SUFFIX,mostbet.com,REJECT
+  - DOMAIN-SUFFIX,melbet.com,REJECT
+  - DOMAIN-SUFFIX,stake.com,REJECT
+  - DOMAIN-SUFFIX,1win.com,REJECT
+  - DOMAIN-SUFFIX,betwinner.com,REJECT
+  - DOMAIN-SUFFIX,parimatch.com,REJECT
+  - DOMAIN-SUFFIX,pin-up.com,REJECT
+  - DOMAIN-SUFFIX,linebet.com,REJECT
+  - DOMAIN-SUFFIX,megapari.com,REJECT
+  - DOMAIN-SUFFIX,betway.com,REJECT
+  - DOMAIN-SUFFIX,dafabet.com,REJECT
+  - DOMAIN-SUFFIX,sbobet.com,REJECT
+  - DOMAIN-SUFFIX,12bet.com,REJECT
+  - DOMAIN-SUFFIX,10bet.com,REJECT
+  - DOMAIN-SUFFIX,betfair.com,REJECT
+  - DOMAIN-SUFFIX,888casino.com,REJECT
+  - DOMAIN-SUFFIX,unibet.com,REJECT
+  - DOMAIN-SUFFIX,leovegas.com,REJECT
+  - DOMAIN-SUFFIX,vulkanvegas.com,REJECT
+  - DOMAIN-SUFFIX,vulkanbet.com,REJECT
+  - DOMAIN-SUFFIX,bcgame.com,REJECT
+
+  # --- 5.2b Trang cÃ¡ Ä‘á»™ má»›i (2025-2026) ---
+  - DOMAIN-SUFFIX,ok9.com,REJECT
+  - DOMAIN-SUFFIX,ok9.club,REJECT
+  - DOMAIN-SUFFIX,v9bet.com,REJECT
+  - DOMAIN-SUFFIX,nohu.club,REJECT
+  - DOMAIN-SUFFIX,nohu90.com,REJECT
+  - DOMAIN-SUFFIX,hitclub.com,REJECT
+  - DOMAIN-SUFFIX,hitclub.gg,REJECT
+  # --- 5.2c Gambling (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,79king.com,REJECT
+  - DOMAIN-SUFFIX,79king.club,REJECT
+  - DOMAIN-SUFFIX,win79.club,REJECT
+  - DOMAIN-SUFFIX,may88.com,REJECT
+  - DOMAIN-SUFFIX,sao88.com,REJECT
+  - DOMAIN-SUFFIX,typhu88.com,REJECT
+  - DOMAIN-SUFFIX,vz99.com,REJECT
+  - DOMAIN-SUFFIX,dabet.com,REJECT
+  - DOMAIN-SUFFIX,dabet.club,REJECT
+  - DOMAIN-SUFFIX,sumvip.com,REJECT
+  - DOMAIN-SUFFIX,sumvip.club,REJECT
+  - DOMAIN-SUFFIX,888b.com,REJECT
+  - DOMAIN-SUFFIX,888b.club,REJECT
+  - DOMAIN-SUFFIX,j88.com,REJECT
+  - DOMAIN-SUFFIX,j88.club,REJECT
+  - DOMAIN-SUFFIX,vip66.club,REJECT
+  - DOMAIN-SUFFIX,68gamebai.com,REJECT
+  - DOMAIN-SUFFIX,king88.com,REJECT
+  - DOMAIN-SUFFIX,sky88.com,REJECT
+  - DOMAIN-SUFFIX,77win.com,REJECT
+  - DOMAIN-SUFFIX,77win.club,REJECT
+  - DOMAIN-SUFFIX,99ok.com,REJECT
+  - DOMAIN-SUFFIX,good88.com,REJECT
+  # DOMAIN-KEYWORD,ok9,REJECT     # Disabled: too short, may match book9.com etc.
+  # DOMAIN-KEYWORD,hitclub,REJECT  # Disabled: may match legitimate domains
+
+  # --- 5.3 Keyword cháº·n cÃ¡ Ä‘á»™ phá»• biáº¿n ---
+  - DOMAIN-KEYWORD,1xbet,REJECT
+  - DOMAIN-KEYWORD,fun88,REJECT
+  - DOMAIN-KEYWORD,w88vn,REJECT
+  - DOMAIN-KEYWORD,8xbet,REJECT
+  - DOMAIN-KEYWORD,jun88,REJECT
+  - DOMAIN-KEYWORD,789bet,REJECT
+  - DOMAIN-KEYWORD,kubet,REJECT
+  # DOMAIN-KEYWORD,sunwin,REJECT  # Disabled: may match sunwindows.com etc.
+  # DOMAIN-KEYWORD,go88,REJECT    # Disabled: may match cargo88.com, lego88.com etc.
+  - DOMAIN-KEYWORD,new88,REJECT
+  # DOMAIN-KEYWORD,hi88,REJECT    # Disabled: may match sushi88.com, phi88.com etc.
+  # DOMAIN-KEYWORD,sin88,REJECT   # Disabled: may match resin88.com etc.
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 6: AI SERVICES ROUTING (PROXY)                â”‚
+  # â”‚  Nguá»“n: tatarinovms/ShadowRocketSimpleConfig         â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 6.1 OpenAI / ChatGPT ---
+  - DOMAIN-SUFFIX,openai.com,PROXY
+  - DOMAIN-SUFFIX,chatgpt.com,PROXY
+  - DOMAIN-SUFFIX,oaistatic.com,PROXY
+  - DOMAIN-SUFFIX,oaiusercontent.com,PROXY
+  - DOMAIN-SUFFIX,chat.openai.com.cdn.cloudflare.net,PROXY
+  - DOMAIN-KEYWORD,openai,PROXY
+
+  # --- 6.2 Anthropic / Claude ---
+  - DOMAIN-SUFFIX,claude.ai,PROXY
+  - DOMAIN-SUFFIX,anthropic.com,PROXY
+
+  # --- 6.3 Google AI ---
+  - DOMAIN-SUFFIX,gemini.google.com,PROXY
+  - DOMAIN-SUFFIX,bard.google.com,PROXY
+  - DOMAIN-SUFFIX,makersuite.google.com,PROXY
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,PROXY
+  - DOMAIN-SUFFIX,aistudio.google.com,PROXY
+  - DOMAIN-SUFFIX,deepmind.google,PROXY
+
+  # --- 6.4 Microsoft Copilot ---
+  - DOMAIN-SUFFIX,copilot.microsoft.com,PROXY
+  - DOMAIN-SUFFIX,sydney.bing.com,PROXY
+  - DOMAIN-SUFFIX,edgeservices.bing.com,PROXY
+
+  # --- 6.5 Other AI Services ---
+  - DOMAIN-SUFFIX,midjourney.com,PROXY
+  - DOMAIN-SUFFIX,stability.ai,PROXY
+  - DOMAIN-SUFFIX,perplexity.ai,PROXY
+  - DOMAIN-SUFFIX,huggingface.co,PROXY
+  - DOMAIN-SUFFIX,poe.com,PROXY
+  - DOMAIN-SUFFIX,character.ai,PROXY
+  - DOMAIN-SUFFIX,replicate.com,PROXY
+  - DOMAIN-SUFFIX,runway.com,PROXY
+  - DOMAIN-SUFFIX,suno.ai,PROXY
+  - DOMAIN-SUFFIX,udio.com,PROXY
+  - DOMAIN-SUFFIX,cursor.sh,PROXY
+  - DOMAIN-SUFFIX,v0.dev,PROXY
+
+  # --- 6.6 New AI Services (2025-2026) ---
+  - DOMAIN-SUFFIX,x.ai,PROXY
+  - DOMAIN-SUFFIX,deepseek.com,PROXY
+  - DOMAIN-SUFFIX,mistral.ai,PROXY
+  - DOMAIN-SUFFIX,cohere.com,PROXY
+  - DOMAIN-SUFFIX,together.ai,PROXY
+  - DOMAIN-SUFFIX,groq.com,PROXY
+  - DOMAIN-SUFFIX,bolt.new,PROXY
+  - DOMAIN-SUFFIX,replit.com,PROXY
+  - DOMAIN-SUFFIX,windsurf.com,PROXY
+  - DOMAIN-SUFFIX,codeium.com,PROXY
+  - DOMAIN-SUFFIX,lovable.dev,PROXY
+  - DOMAIN-SUFFIX,labs.google,PROXY
+  - DOMAIN-SUFFIX,notebooklm.google,PROXY
+  - DOMAIN-SUFFIX,notebooklm.google.com,PROXY
+  # --- 6.7 AI Services (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,grok.com,PROXY
+  - DOMAIN-SUFFIX,qwen.ai,PROXY
+  - DOMAIN-SUFFIX,kimi.com,PROXY
+  - DOMAIN-SUFFIX,moonshot.cn,PROXY
+  - DOMAIN-SUFFIX,genspark.ai,PROXY
+  - DOMAIN-SUFFIX,manus.im,PROXY
+  - DOMAIN-SUFFIX,abacus.ai,PROXY
+  - DOMAIN-SUFFIX,fireworks.ai,PROXY
+  - DOMAIN-SUFFIX,openrouter.ai,PROXY
+  - DOMAIN-SUFFIX,elevenlabs.io,PROXY
+  - DOMAIN-SUFFIX,heygen.com,PROXY
+  - DOMAIN-SUFFIX,pika.art,PROXY
+  - DOMAIN-SUFFIX,krea.ai,PROXY
+  - DOMAIN-SUFFIX,ideogram.ai,PROXY
+  - DOMAIN-SUFFIX,leonardo.ai,PROXY
+  - DOMAIN-SUFFIX,civitai.com,PROXY
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 7: Bá»” SUNG AD DOMAINS CÃ’N THIáº¾U              â”‚
+  # â”‚  Nguá»“n: GMOogway + fmz200/wool_scripts               â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 7.1 Bá»• sung Ad Networks ---
+  - DOMAIN-SUFFIX,ads-twitter.com,REJECT
+  - DOMAIN-SUFFIX,advertising.com,REJECT
+  - DOMAIN-SUFFIX,liadm.com,REJECT
+  # DOMAIN-SUFFIX,branch.io,REJECT  # Disabled: breaks deep linking
+  # DOMAIN-SUFFIX,app.link,REJECT   # Disabled: breaks deep linking
+  # DOMAIN-SUFFIX,app.adjust.com,REJECT  # Redundant: covered by adjust.com in section 2.1
+  # DOMAIN-SUFFIX,s.adjust.com,REJECT    # Redundant: covered by adjust.com in section 2.1
+  - DOMAIN-SUFFIX,impression.link,REJECT
+  - DOMAIN-SUFFIX,metric.gstatic.com,REJECT
+  # DOMAIN-SUFFIX,pagead.l.doubleclick.net,REJECT  # Redundant: covered by doubleclick.net in section 1.1
+  # DOMAIN-SUFFIX,adx.g.doubleclick.net,REJECT     # Redundant: covered by doubleclick.net in section 1.1
+
+  # --- 7.2 Quáº£ng cÃ¡o á»©ng dá»¥ng Trung Quá»‘c ---
+  - DOMAIN-SUFFIX,cm.bilibili.com,REJECT
+  - DOMAIN-SUFFIX,data.bilibili.com,REJECT
+  - DOMAIN-SUFFIX,zhihu-web-analytics.zhihu.com,REJECT
+  - DOMAIN-SUFFIX,sugar.zhihu.com,REJECT
+  - DOMAIN-SUFFIX,118.etao.com,REJECT
+  - DOMAIN-SUFFIX,adash.m.taobao.com,REJECT
+  - DOMAIN-SUFFIX,sclick.net,REJECT
+  - DOMAIN-SUFFIX,re.taobao.com,REJECT
+  - DOMAIN-SUFFIX,sdk.m.amap.com,REJECT
+
+  # --- 7.3 Phishing / Malware / Crypto Scam ---
+  # DOMAIN-KEYWORD,phishing,REJECT  # Disabled: too broad, blocks anti-phishing education sites
+  # DOMAIN-KEYWORD,malware,REJECT   # Disabled: too broad, blocks anti-malware.org etc.
+  - DOMAIN-SUFFIX,coinhive.com,REJECT
+  - DOMAIN-SUFFIX,coin-hive.com,REJECT
+  - DOMAIN-SUFFIX,authedmine.com,REJECT
+  - DOMAIN-SUFFIX,cryptoloot.pro,REJECT
+  - DOMAIN-SUFFIX,crypto-loot.com,REJECT
+  # --- 7.4 Crypto Scam (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,coinimp.com,REJECT
+  - DOMAIN-SUFFIX,webminepool.com,REJECT
+  - DOMAIN-SUFFIX,minero.cc,REJECT
+  - DOMAIN-SUFFIX,jsecoin.com,REJECT
+  - DOMAIN-SUFFIX,coinhive-manager.com,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 8: CHáº¶N TELEMETRY & TRACKING Há»† THá»NG         â”‚
+  # â”‚  Nguá»“n: Johnshall/p-w-p                              â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 8.1 Microsoft Telemetry ---
+  - DOMAIN-SUFFIX,data.microsoft.com,REJECT
+  - DOMAIN-SUFFIX,telemetry.microsoft.com,REJECT
+
+  # --- 8.2 Apple Analytics ---
+  - DOMAIN-SUFFIX,metrics.icloud.com,REJECT
+  - DOMAIN-SUFFIX,metrics.mzstatic.com,REJECT
+  - DOMAIN-SUFFIX,supportmetrics.apple.com,REJECT
+  - DOMAIN-SUFFIX,books-analytics-events.apple.com,REJECT
+  - DOMAIN-SUFFIX,xp.apple.com,REJECT
+  - DOMAIN-SUFFIX,idiag.apple.com,REJECT
+  - DOMAIN-SUFFIX,iphonesubmissions.apple.com,REJECT
+  - DOMAIN-SUFFIX,radarsubmissions.apple.com,REJECT
+
+  # --- 8.3 Xiaomi / Huawei / Samsung Tracking ---
+  - DOMAIN-SUFFIX,tracking.miui.com,REJECT
+  - DOMAIN-SUFFIX,data.mistat.xiaomi.com,REJECT
+  - DOMAIN-SUFFIX,tracking.rus.miui.com,REJECT
+  - DOMAIN-SUFFIX,logservice.hicloud.com,REJECT
+  - DOMAIN-SUFFIX,metrics.data.hicloud.com,REJECT
+  - DOMAIN-SUFFIX,samsungads.com,REJECT
+  # --- 8.4 Telemetry (2026) [SYNC] ---
+  # - DOMAIN-SUFFIX,vortex.data.microsoft.com,REJECT
+  # - DOMAIN-SUFFIX,settings-win.data.microsoft.com,REJECT
+  # - DOMAIN-SUFFIX,watson.telemetry.microsoft.com,REJECT
+  - DOMAIN-SUFFIX,samsung-com.112.2o7.net,REJECT
+  - DOMAIN-SUFFIX,nmetrics.samsung.com,REJECT
+  - DOMAIN-SUFFIX,log.tbsapp.qq.com,REJECT
+  - DOMAIN-SUFFIX,oimg.vivo.com.cn,REJECT
+  - DOMAIN-SUFFIX,adsdk.dplaceholder.oppomobile.com,REJECT
+  - DOMAIN-SUFFIX,bdapi.oppomobile.com,REJECT
+  - DOMAIN-SUFFIX,iadsdk.apple.com,REJECT
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 9: GAMING SERVICES ROUTING (PROXY)             â”‚
+  # â”‚  Nguá»“n: tatarinovms/ShadowRocketSimpleConfig          â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 9.1 PlayStation Network ---
+  - DOMAIN-SUFFIX,playstation.com,PROXY
+  - DOMAIN-SUFFIX,playstation.net,PROXY
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com,PROXY
+
+  # --- 9.2 Xbox / Microsoft Gaming ---
+  - DOMAIN-SUFFIX,xbox.com,PROXY
+  - DOMAIN-SUFFIX,xboxlive.com,PROXY
+
+  # --- 9.3 Steam ---
+  - DOMAIN-SUFFIX,steampowered.com,PROXY
+  - DOMAIN-SUFFIX,steamcommunity.com,PROXY
+  - DOMAIN-SUFFIX,steamstatic.com,PROXY
+
+  # --- 9.4 Nintendo ---
+  - DOMAIN-SUFFIX,nintendo.com,PROXY
+  - DOMAIN-SUFFIX,nintendo.net,PROXY
+
+  # --- 9.5 Epic Games ---
+  - DOMAIN-SUFFIX,epicgames.com,PROXY
+  - DOMAIN-SUFFIX,unrealengine.com,PROXY
+
+  # --- 9.6 Riot Games (LOL, Valorant, TFT) ---
+  - DOMAIN-SUFFIX,riotgames.com,PROXY
+  - DOMAIN-SUFFIX,leagueoflegends.com,PROXY
+  - DOMAIN-SUFFIX,riotcdn.net,PROXY
+
+  # --- 9.7 EA / Blizzard / Ubisoft ---
+  - DOMAIN-SUFFIX,ea.com,PROXY
+  - DOMAIN-SUFFIX,origin.com,PROXY
+  - DOMAIN-SUFFIX,blizzard.com,PROXY
+  - DOMAIN-SUFFIX,battle.net,PROXY
+  - DOMAIN-SUFFIX,ubisoft.com,PROXY
+  - DOMAIN-SUFFIX,ubi.com,PROXY
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 10: STREAMING SERVICES (PROXY - Geo-unlock)    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 10.1 Netflix ---
+  - DOMAIN-SUFFIX,netflix.com,PROXY
+  - DOMAIN-SUFFIX,netflix.net,PROXY
+  - DOMAIN-SUFFIX,nflximg.net,PROXY
+  - DOMAIN-SUFFIX,nflximg.com,PROXY
+  - DOMAIN-SUFFIX,nflxvideo.net,PROXY
+  - DOMAIN-SUFFIX,nflxso.net,PROXY
+  - DOMAIN-SUFFIX,nflxext.com,PROXY
+
+  # --- 10.2 Disney+ ---
+  - DOMAIN-SUFFIX,disneyplus.com,PROXY
+  - DOMAIN-SUFFIX,disney-plus.net,PROXY
+  - DOMAIN-SUFFIX,dssott.com,PROXY
+  - DOMAIN-SUFFIX,bamgrid.com,PROXY
+  - DOMAIN-SUFFIX,disney-portal.my.onetrust.com,PROXY
+
+  # --- 10.3 Amazon Prime Video ---
+  - DOMAIN-SUFFIX,primevideo.com,PROXY
+  - DOMAIN-SUFFIX,amazonvideo.com,PROXY
+  - DOMAIN-SUFFIX,aiv-cdn.net,PROXY
+
+  # --- 10.4 HBO / Max ---
+  - DOMAIN-SUFFIX,hbomax.com,PROXY
+  - DOMAIN-SUFFIX,max.com,PROXY
+  - DOMAIN-SUFFIX,hbo.com,PROXY
+
+  # --- 10.5 Other Streaming ---
+  - DOMAIN-SUFFIX,hulu.com,PROXY
+  - DOMAIN-SUFFIX,hulustream.com,PROXY
+  - DOMAIN-SUFFIX,tv.apple.com,PROXY
+  - DOMAIN-SUFFIX,crunchyroll.com,PROXY
+  - DOMAIN-SUFFIX,vrv.co,PROXY
+  - DOMAIN-SUFFIX,dazn.com,PROXY
+  - DOMAIN-SUFFIX,bilibili.tv,PROXY
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 11: SOCIAL MEDIA ROUTING (PROXY)               â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 11.1 Telegram ---
+  - DOMAIN-SUFFIX,telegram.org,PROXY
+  - DOMAIN-SUFFIX,t.me,PROXY
+  - DOMAIN-SUFFIX,telegra.ph,PROXY
+  - DOMAIN-SUFFIX,telegram.me,PROXY
+  - IP-CIDR,91.108.0.0/16,PROXY,no-resolve
+  - IP-CIDR,149.154.160.0/20,PROXY,no-resolve
+
+  # --- 11.2 Discord ---
+  - DOMAIN-SUFFIX,discord.com,PROXY
+  - DOMAIN-SUFFIX,discord.gg,PROXY
+  - DOMAIN-SUFFIX,discordapp.com,PROXY
+  - DOMAIN-SUFFIX,discordapp.net,PROXY
+  - DOMAIN-SUFFIX,discord.media,PROXY
+
+  # --- 11.3 Reddit ---
+  - DOMAIN-SUFFIX,reddit.com,PROXY
+  - DOMAIN-SUFFIX,redd.it,PROXY
+  - DOMAIN-SUFFIX,redditmedia.com,PROXY
+  - DOMAIN-SUFFIX,redditstatic.com,PROXY
+
+  # --- 11.4 Threads / WhatsApp Web ---
+  - DOMAIN-SUFFIX,threads.net,PROXY
+  - DOMAIN-SUFFIX,web.whatsapp.com,PROXY
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 12: DEVELOPER TOOLS (PROXY)                    â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 12.1 GitHub / GitLab ---
+  - DOMAIN-SUFFIX,github.com,PROXY
+  - DOMAIN-SUFFIX,github.io,PROXY
+  - DOMAIN-SUFFIX,githubusercontent.com,PROXY
+  - DOMAIN-SUFFIX,githubassets.com,PROXY
+  - DOMAIN-SUFFIX,gitlab.com,PROXY
+  - DOMAIN-SUFFIX,gitlab.io,PROXY
+
+  # --- 12.2 Package Registries ---
+  - DOMAIN-SUFFIX,docker.io,PROXY
+  - DOMAIN-SUFFIX,docker.com,PROXY
+  - DOMAIN-SUFFIX,npmjs.org,PROXY
+  - DOMAIN-SUFFIX,npmjs.com,PROXY
+  - DOMAIN-SUFFIX,yarnpkg.com,PROXY
+  - DOMAIN-SUFFIX,pypi.org,PROXY
+  - DOMAIN-SUFFIX,registry.npmmirror.com,PROXY
+
+  # --- 12.3 Developer Communities ---
+  - DOMAIN-SUFFIX,stackoverflow.com,PROXY
+  - DOMAIN-SUFFIX,stackexchange.com,PROXY
+  - DOMAIN-SUFFIX,medium.com,PROXY
+  - DOMAIN-SUFFIX,dev.to,PROXY
+
+  # â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  # â”‚  PHáº¦N 13: Tá»I Æ¯U Káº¾T Ná»I (DIRECT - Bá»Ž QUA VPN)       â”‚
+  # â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+  # --- 13.1 Apple Services (Bypass for max speed & stability) ---
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,me.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+
+  # --- 13.2 Vietnamese Banking & E-Wallets (Anti-block & Bypass) ---
+  - DOMAIN-SUFFIX,momo.vn,DIRECT
+  - DOMAIN-SUFFIX,mservice.com.vn,DIRECT
+  - DOMAIN-SUFFIX,zalopay.vn,DIRECT
+  - DOMAIN-SUFFIX,vnpay.vn,DIRECT
+  - DOMAIN-SUFFIX,vietcombank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,techcombank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,mbbank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,tpb.vn,DIRECT
+  - DOMAIN-SUFFIX,vpbank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,bidv.com.vn,DIRECT
+  - DOMAIN-SUFFIX,vtb.vn,DIRECT
+  - DOMAIN-SUFFIX,vietinbank.vn,DIRECT
+  - DOMAIN-SUFFIX,agribank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,acb.com.vn,DIRECT
+  - DOMAIN-SUFFIX,vib.com.vn,DIRECT
+  - DOMAIN-SUFFIX,sacombank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,hdbank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,ocb.com.vn,DIRECT
+  - DOMAIN-SUFFIX,shb.com.vn,DIRECT
+  - DOMAIN-SUFFIX,msb.com.vn,DIRECT
+  - DOMAIN-SUFFIX,lpbank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,eximbank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,namabank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,seabank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,cake.vn,DIRECT
+  - DOMAIN-SUFFIX,vietqr.io,DIRECT
+  - DOMAIN-SUFFIX,napas.com.vn,DIRECT
+  # --- Banking VN (2026) [SYNC] ---
+  - DOMAIN-SUFFIX,timo.vn,DIRECT
+  - DOMAIN-SUFFIX,ubank.vn,DIRECT
+  - DOMAIN-SUFFIX,scb.com.vn,DIRECT
+  - DOMAIN-SUFFIX,abbank.vn,DIRECT
+  - DOMAIN-SUFFIX,pvcombank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,baovietbank.vn,DIRECT
+  - DOMAIN-SUFFIX,kienlongbank.com,DIRECT
+  - DOMAIN-SUFFIX,vietabank.com.vn,DIRECT
+  - DOMAIN-SUFFIX,bvbank.net.vn,DIRECT
+  - DOMAIN-SUFFIX,viettelmoney.vn,DIRECT
+  - DOMAIN-SUFFIX,viettelpay.vn,DIRECT
+  - DOMAIN-SUFFIX,moca.vn,DIRECT
+  - DOMAIN-SUFFIX,shopeepay.vn,DIRECT
+  - DOMAIN-SUFFIX,smartpay.vn,DIRECT
+
+  # --- 13.3 Popular Vietnamese Apps (Lightning fast local access) ---
+  - DOMAIN-SUFFIX,zalo.me,DIRECT
+  - DOMAIN-SUFFIX,zaloapp.com,DIRECT
+  - DOMAIN-SUFFIX,shopee.vn,DIRECT
+  - DOMAIN-SUFFIX,shopeemobile.com,DIRECT
+  - DOMAIN-SUFFIX,tiki.vn,DIRECT
+  - DOMAIN-SUFFIX,lazada.vn,DIRECT
+  - DOMAIN-SUFFIX,grab.com,DIRECT
+  - DOMAIN-SUFFIX,be.com.vn,DIRECT
+  - DOMAIN-SUFFIX,fpt.vn,DIRECT
+  - DOMAIN-SUFFIX,vnexpress.net,DIRECT
+
+  # --- 13.4 Vietnam Local Network & GeoIP (Lightning fast local traffic) ---
+  - DOMAIN-SUFFIX,vn,DIRECT
+  - GEOIP,VN,DIRECT
+
+
+# === SCRIPT INJECT ===
+
+mitm:
+  - "-redirector*.googlevideo.com"
+  - "*.googlevideo.com"
+  - "www.youtube.com"
+  - "s.youtube.com"
+  - "youtubei.googleapis.com"
+  - "spclient.wg.spotify.com"
+  - "*-spclient.spotify.com"
+  - "gads.current.spotify.com"
+  - "api.spotify.com"
+  - "api.revenuecat.com"
+  - "api.rc-backup.com"
+  - "buy.itunes.apple.com"
+  - "api.picsart.com"
+  - "api.picsart.cn"
+  - "api.meiease.com"
+  - "api.meiease.cn"
+  - "api-mobile.soundcloud.com"
+  - "mb3admin.com"
+  - "api-account.kinemasters.com"
+  - "photos.adobe.io"
+  - "lcs-mobile-cops.adobe.io"
+  - "app.algoriddim.com"
+  - "api.calm.com"
+  - "api.busuu.com"
+  - "api.prod.headspace.com"
+  - "vsco.co"
+  - "api.funimate.com"
+  - "us-central1-alight-creative.cloudfunctions.net"
+  - "api-sub.meitu.com"
+  - "premium-*.truecaller.com"
+  - "*.intsig.net"
+  - "api.mr.pixocial.com"
+  - "newbeee-api.beautyplus.com"
+  - "user-snow-api.snow.me"
+  - "user-kaji-api.b612kaji.com"
+  - "h5.xiuxiu.meitu.com"
+  - "api.xiuxiu.meitu.com"
+  - "account.wps.cn"
+  - "*.account.wps.com"
+  - "www.xmind.cn"
+  - "www.xmind.net"
+  - "www.xmind.app"
+  - "ars.alar.my"
+  - "subscription.grammarly.com"
+  - "notability.com"
+  - "lapi.photomath.net"
+  - "pro.smallpdf.com"
+  - "billing.peakcloud.org"
+  - "api.polaxiong.com"
+  - "premium-api.myfitnesspal.com"
+  - "apic.musixmatch.com"
+  - "server.yoyiapp.com"
+  - "mid.zineapi.com"
+  - "apimboom2.globaldelight.net"
+  - "api.flexibits.com"
+  - "api.craft.do"
+  - "dayone.app"
+  - "restore-access.indream.app"
+  - "service.ilovepdf.com"
+  - "api.mondlylanguages.com"
+  - "api.memrise.com"
+  - "api.alohaprofile.com"
+  - "pre.dailyyoga.com"
+  - "app-subscription-proxy.accuweather.com"
+  - "api-production.endel.io"
+  - "flomoapp.com"
+  - "backend.getdrafts.com"
+  - "api.gotokeep.com"
+  - "payments.invideo.io"
+  - "ssl-api.itranslateapp.com"
+  - "payment-api.lingvist.com"
+  - "*.oracle.bendingspoonsapps.com"
+  - "app.bilibili.com"
+  - "accounts.agenda.com"
+  - "license.pdfexpert.com"
+  - "api.sortedapp.com"
+  - "api.duolingo.com"
+  - "ios-api-cdn.duolingo.com"
+  - "api.mycake.me"
+  - "quizlet.com"
+  - "v1.darkroom.co"
+  - "com.zijayrate.analogcam"
+  - "api.elsaspeak.com"
+  - "api.photoroom.com"
+  - "api.remini.ai"
+  - "api.bazaart.me"
+  - "firebaseremoteconfig.googleapis.com"
+  - "api.rophim1.vip"
+  - "rophimapi.net"
+
+force-http-engine:
+  - "api.revenuecat.com:443"
+  - "api.rc-backup.com:443"
+  - "firebaseremoteconfig.googleapis.com:443"
+
+http:
+  url-rewrite:
+    - "^https?://[\\w-]+\\.googlevideo\\.com/initplayback.+&oad - reject-200"
+
+script-providers:
+  yt-req:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/youtube.response.js
+    interval: 86400
+  yt-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/youtube.response.js
+    interval: 86400
+  sp-json:
+    url: https://raw.githubusercontent.com/app2smile/rules/df6366a7024e0b3f0aa3510c5b791eea6f3cba89/js/spotify-json.js
+    interval: 86400
+  sp-proto:
+    url: https://raw.githubusercontent.com/app2smile/rules/df6366a7024e0b3f0aa3510c5b791eea6f3cba89/js/spotify-proto.js
+    interval: 86400
+  sp-premium-json:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/spotify.js?v=3.2.5
+    interval: 86400
+  rc-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js?v=3.2.5
+    interval: 86400
+  rc-backup:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js?v=3.2.5
+    interval: 86400
+  locket-30s:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Locket_30s.js?v=3.2.5
+    interval: 86400
+  sc-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/soundcloud.js
+    interval: 86400
+  pa-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js
+    interval: 86400
+  pa-storages:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js
+    interval: 86400
+  pa-nobyda:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/PicsArt.js
+    interval: 86400
+  lr-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  ps-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/photoshop.js
+    interval: 86400
+  emby-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/emby.js
+    interval: 86400
+  rophim-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/rophim.js
+    interval: 86400
+  webfilm-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/webfilm_inject.js
+    interval: 86400
+  km-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Kinemaster.js
+    interval: 86400
+  dj-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/djay.js
+    interval: 86400
+  calm-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/calm.js
+    interval: 86400
+  busuu-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/busuu.js
+    interval: 86400
+  duolingo-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/duolingo.js
+    interval: 86400
+  elsa-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/elsa.js
+    interval: 86400
+  adguard-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/adguard.js
+    interval: 86400
+  grammarly-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/grammarly.js
+    interval: 86400
+  cake-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/cake.js
+    interval: 86400
+  quizlet-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/quizlet.js
+    interval: 86400
+  hs-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/headspace.js
+    interval: 86400
+  am-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/AlightMotion.js
+    interval: 86400
+  wink-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Wink.js
+    interval: 86400
+  tc-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/TrueCaller.js
+    interval: 86400
+  cs-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/camScanner.js
+    interval: 86400
+  bp-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/BeautyPlus.js
+    interval: 86400
+  vsco-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/VSCO.js
+    interval: 86400
+  snow-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Snow.js
+    interval: 86400
+  b612-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/Snow.js
+    interval: 86400
+  meitu-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/meitu.js
+    interval: 86400
+  fun-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/funimate.js
+    interval: 86400
+  itunes-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/iTunes.js
+    interval: 86400
+  wps-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/wps.js
+    interval: 86400
+  darkroom-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/darkroom.js
+    interval: 86400
+  oldroll-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/oldroll.js
+    interval: 86400
+  xmind-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/xmind.js
+    interval: 86400
+  alarmy-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  grammarly-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/grammarly.js
+    interval: 86400
+  notability-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  photomath-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/photomath.js
+    interval: 86400
+  smallpdf-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  peak-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  polarr-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  mfp-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  mxm-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  fimo-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/fimo.js
+    interval: 86400
+  varlens-res:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  boom-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  fantastical-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  craft-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  dayone-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  nicegram-request:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  ilovepdf-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  mondly-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  memrise-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  aloha-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  dailyyoga-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  accuweather-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  endel-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  flomo-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  drafts-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  keep-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  invideo-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  itranslate-request:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  lingvist-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  bendingspoons-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  adobescan-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  bilibili-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  agenda-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  pdfexpert-request:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  documents-request:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+  sorted-response:
+    url: https://raw.githubusercontent.com/K4Z3X0R/NguyenNgocAnhTu/master/Module/js/revenuecat_multi.js
+    interval: 86400
+
+scriptings:
+  - http-request:
+      name: yt-req
+      match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch)
+      script-provider: yt-req
+      require-body: true
+      binary-mode: true
+      timeout: 30
+  - http-response:
+      name: yt-res
+      match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
+      script-provider: yt-res
+      require-body: true
+      binary-mode: true
+      timeout: 30
+      argument: '{"lyricLang":"vi","captionLang":"vi","blockUpload":false,"blockImmersive":false,"debug":false}'
+  - http-request:
+      name: sp-json
+      match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+      script-provider: sp-json
+      timeout: 30
+  - http-response:
+      name: sp-proto
+      match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+      script-provider: sp-proto
+      require-body: true
+      binary-mode: true
+      timeout: 30
+  - http-response:
+      name: sp-premium-json
+      match: ^https?:\/\/(api\.spotify\.com\/v1\/me|.*spclient.*\.spotify\.com(:443)?\/(identity\/v3\/me|device-capabilities\/v1\/capabilities|user-attributes\/v\d+\/attributes|bootstrap\/v1\/bootstrap|melody\/v1\/check_license))
+      script-provider: sp-premium-json
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: rc-res
+      match: ^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$)
+      script-provider: rc-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: rc-backup
+      match: ^https:\/\/api\.rc-backup\.com\/.+\/(receipts$|subscribers\/[^/]+$)
+      script-provider: rc-backup
+      require-body: true
+      timeout: 60
+  - http-request:
+      name: locket-30s-req
+      match: ^https?:\/\/firebaseremoteconfig\.googleapis\.com\/v1\/projects\/.*
+      script-provider: locket-30s
+      timeout: 60
+  - http-response:
+      name: locket-30s
+      match: ^https?:\/\/firebaseremoteconfig\.googleapis\.com\/v1\/projects\/.*
+      script-provider: locket-30s
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: sc-res
+      match: ^https?:\/\/api-mobile\.soundcloud\.com\/configuration\/ios
+      script-provider: sc-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: pa-res
+      match: ^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases
+      script-provider: pa-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: pa-storages
+      match: ^https:\/\/api\.picsart\.com\/gw-v2\/cloud-storage\/v1\/me\/storages
+      script-provider: pa-storages
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: pa-nobyda
+      match: ^https?:\/\/api\.(picsart|meiease)\.c(n|om)\/users\/show\/me\.json
+      script-provider: pa-nobyda
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: lr-res
+      match: ^https:\/\/photos\.adobe\.io\/v2\/accounts
+      script-provider: lr-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: ps-res
+      match: ^https:\/\/lcs-mobile-cops\.adobe\.io\/mobile_profile
+      script-provider: ps-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: emby-res
+      match: ^https?:\/\/mb3admin\.com\/admin\/service\/registration\/validateDevice
+      script-provider: emby-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: rophim-res
+      match: ^https?:\/\/.*rophim.*?\/(baseapi\/api\/v1\/(tcoin\/me|user|vip)|api\/auth\/session)
+      script-provider: rophim-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: webfilm-res
+      match: ^https?:\/\/.*(rophim|phimmoi|xoiphim|subnhanh|dongphim|motphim).*?\/.*
+      script-provider: webfilm-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: km-res
+      match: ^https:\/\/api-account\.kinemasters\.com\/v\d\/user\/subscribe$
+      script-provider: km-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: dj-res
+      match: ^https:\/\/app\.algoriddim\.com\/api\/v1\/validate-receipt
+      script-provider: dj-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: calm-res
+      match: ^https?:\/\/api\.calm\.com\/(me|device|ios\/receipt)
+      script-provider: calm-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: busuu-res
+      match: ^https:\/\/api\.busuu\.com\/users\/me
+      script-provider: busuu-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: duolingo-res
+      match: ^https?:\/\/(api|ios-api-cdn)\.duolingo\.com\/(2017-06-30\/users\/|users\/)
+      script-provider: duolingo-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: elsa-res
+      match: ^https?:\/\/pool\.elsanow\.io\/(user\/api\/v\d\/purchase|entitlement\/api\/v\d\/user\/entitlements)
+      script-provider: elsa-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: adguard-res
+      match: ^https?:\/\/mobile-api\.adguard\.org\/api\/.+\/ios_validate_receipt\/
+      script-provider: adguard-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: grammarly-res
+      match: ^https?:\/\/.*\.grammarly\.com\/(api\/v\d\/subscription|v\d\/user\/oranonymous)
+      script-provider: grammarly-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: cake-res
+      match: ^https?:\/\/api\.mycake\.me\/v\d+\/users\/me
+      script-provider: cake-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: quizlet-res
+      match: ^https?:\/\/quizlet\.com\/webapi\/3\.4\/users\/
+      script-provider: quizlet-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: hs-res
+      match: ^https:\/\/api\.prod\.headspace\.com\/.*\/user-subscriptions
+      script-provider: hs-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: am-res
+      match: ^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses
+      script-provider: am-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: wink-res
+      match: ^https?:\/\/api-sub\.meitu\.com\/.*vip
+      script-provider: wink-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: tc-res
+      match: ^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple)
+      script-provider: tc-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: cs-res
+      match: ^https:\/\/(api|api-cs.*)\.intsig\.net\/(purchase\/cs\/query_prop|queryProperty|getPrivilegeItem)
+      script-provider: cs-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: bp-res
+      match: ^https:\/\/(api\.mr\.pixocial\.com\/v1\/manual_unlock|newbeee-api\.beautyplus\.com\/api\/v1\/asset\/balance)
+      script-provider: bp-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: vsco-res
+      match: ^https:\/\/vsco\.co\/api\/subscriptions\/2\.1\/user-subscriptions
+      script-provider: vsco-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: snow-res
+      match: ^https?:\/\/user-snow-api\.snow\.me\/v\d\/purchase\/subscription\/subscriber\/status
+      script-provider: snow-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: b612-res
+      match: ^https?:\/\/user-kaji-api\.b612kaji\.com\/v\d\/purchase\/subscription\/subscriber\/status
+      script-provider: b612-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: meitu-res
+      match: ^https?:\/\/(h5|api)\.xiuxiu\.meitu\.com\/v\d\/(h\d\/vip|vip|user)\/
+      script-provider: meitu-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: fun-res
+      match: ^https:\/\/api\.funimate\.com\/users\/me
+      script-provider: fun-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: itunes-res
+      match: ^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$
+      script-provider: itunes-res
+      require-body: true
+      timeout: 60
+  - http-response:
+      name: wps-res
+      match: ^https?:\/\/.*?account\.wps\.(com|cn)(:\d+)?\/api\/users\/\w+\/overview$
+      script-provider: wps-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: darkroom-res
+      match: ^https:\/\/v1\.darkroom\.co\/v1\/receipts\/apple
+      script-provider: darkroom-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: oldroll-res
+      match: ^https?:\/\/com\.zijayrate\.analogcam\/vipforever10
+      script-provider: oldroll-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: xmind-res
+      match: ^https?:\/\/www\.xmind\.(cn|net|app)\/_res\/devices
+      script-provider: xmind-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: alarmy-res
+      match: ^https:\/\/ars\.alar\.my\/api\/v2\/user\/sync
+      script-provider: alarmy-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: grammarly-res
+      match: ^https?:\/\/subscription\.grammarly\.com\/api\/v1\/subscription$
+      script-provider: grammarly-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: notability-res
+      match: ^https:\/\/notability\.com\/subscriptions
+      script-provider: notability-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: photomath-res
+      match: ^https?:\/\/lapi\.photomath\.net\/v4\/me
+      script-provider: photomath-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: smallpdf-res
+      match: ^https?:\/\/pro\.smallpdf\.com\/pro\/account
+      script-provider: smallpdf-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: peak-res
+      match: ^https:\/\/billing\.peakcloud\.org\/billing\/2\/user\/me
+      script-provider: peak-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: polarr-res
+      match: ^https:\/\/api\.polaxiong\.com\/v1\/payments\/appleiap\/receipts\/confirmation
+      script-provider: polarr-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: mfp-res
+      match: ^https?:\/\/premium-api\.myfitnesspal\.com\/v3\/subscriptions\/MFP\/
+      script-provider: mfp-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: mxm-res
+      match: ^https?:\/\/apic\.musixmatch\.com\/ws\/1\.1\/config\.get
+      script-provider: mxm-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: fimo-res
+      match: ^https:\/\/server\.yoyiapp\.com\/fimo-user\/user$
+      script-provider: fimo-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: varlens-res
+      match: ^https:\/\/mid\.zineapi\.com\/@varlens\/api\/user\/info\/
+      script-provider: varlens-res
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: boom-response
+      match: ^https:\/\/apimboom2\.globaldelight\.net\/itunesreceipt_v2\.php$
+      script-provider: boom-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: fantastical-response
+      match: ^https:\/\/api\.flexibits\.com\/(v1\/auth\/device|v1\/account\/details)
+      script-provider: fantastical-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: craft-response
+      match: ^https:\/\/api\.craft\.do\/auth\/v2\/profile
+      script-provider: craft-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: dayone-response
+      match: ^https?:\/\/dayone\.app\/api\/v2\/users\/(receipt|account-status)
+      script-provider: dayone-response
+      require-body: true
+      timeout: 30
+  - http-request:
+      name: nicegram-request
+      match: ^https?:\/\/restore-access\.indream\.app\/restoreAccess\?id=\w+$
+      script-provider: nicegram-request
+      timeout: 30
+  - http-response:
+      name: ilovepdf-response
+      match: ^https?:\/\/service\.ilovepdf\.com\/v1\/user
+      script-provider: ilovepdf-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: mondly-response
+      match: ^https:\/\/api\.mondlylanguages\.com\/v3\/ios\/user\/sync
+      script-provider: mondly-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: memrise-response
+      match: ^https:\/\/api\.memrise\.com\/v1\.18
+      script-provider: memrise-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: aloha-response
+      match: ^https?:\/\/api\.alohaprofile\.com\/v1\/profile_info
+      script-provider: aloha-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: dailyyoga-response
+      match: ^https?:\/\/pre\.dailyyoga\.com\/h2oapi\/user\/getUserDetail
+      script-provider: dailyyoga-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: accuweather-response
+      match: ^https?:\/\/app-subscription-proxy\.accuweather\.com\/subscriptions\/v1\/apple\/validate
+      script-provider: accuweather-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: endel-response
+      match: ^https:\/\/api-production\.endel\.io\/v4\/call
+      script-provider: endel-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: flomo-response
+      match: ^https:\/\/flomoapp\.com\/api\/v1\/user\/me
+      script-provider: flomo-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: drafts-response
+      match: ^https:\/\/backend\.getdrafts\.com\/api\/v1\/verification\/verify_receipt
+      script-provider: drafts-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: keep-response
+      match: ^https:\/\/api\.gotokeep\.com
+      script-provider: keep-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: invideo-response
+      match: ^https?:\/\/payments\.invideo\.io\/(verify_purchase|subscription)
+      script-provider: invideo-response
+      require-body: true
+      timeout: 30
+  - http-request:
+      name: itranslate-request
+      match: ^https:\/\/ssl-api\.itranslateapp\.com\/accounts\/v\d\/subscriptions\/verify\/ios
+      script-provider: itranslate-request
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: lingvist-response
+      match: ^https:\/\/payment-api\.lingvist\.com\/.+\/user\/services
+      script-provider: lingvist-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: bendingspoons-response
+      match: ^https?:\/\/.*\.oracle\.bendingspoonsapps\.com\/v\d\/(users\/.+|purchases\/verify)
+      script-provider: bendingspoons-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: adobescan-response
+      match: ^https?:\/\/lcs-mobile-cops\.adobe\.io\/(?!mobile_profile).+
+      script-provider: adobescan-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: bilibili-response
+      match: ^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo
+      script-provider: bilibili-response
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: agenda-response
+      match: ^https:\/\/accounts\.agenda\.com\/users\/.*\/license
+      script-provider: agenda-response
+      require-body: true
+      timeout: 30
+  - http-request:
+      name: pdfexpert-request
+      match: ^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/pdfexpert6\/subscription\/refresh
+      script-provider: pdfexpert-request
+      require-body: true
+      timeout: 30
+  - http-request:
+      name: documents-request
+      match: ^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh
+      script-provider: documents-request
+      require-body: true
+      timeout: 30
+  - http-response:
+      name: sorted-response
+      match: ^https:\/\/api\.sortedapp\.com\/receipts\/verify
+      script-provider: sorted-response
+      require-body: true
+      timeout: 30

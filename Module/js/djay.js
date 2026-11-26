@@ -1,0 +1,65 @@
+/*
+ * @name: Djay Pro Premium Unlock
+ * @author: Nguyễn Ngọc Anh Tú (z3rokaze)
+ * @homepage: https://github.com/K4Z3X0R/NguyenNgocAnhTu
+ * @date: 2026-05-09
+ */
+
+(function () {
+var rawBody = ($response && $response.body) || "";
+var objc;
+try { objc = JSON.parse(rawBody); } catch (e) {}
+
+var djayPatch = {
+    "status": 0,
+    "receipt": {
+        "receipt_type": "Production",
+        "bundle_id": "com.algoriddim.djay-iphone",
+        "in_app": [
+            {
+                "quantity": "1",
+                "product_id": "com.algoriddim.djay_pro_yearly",
+                "transaction_id": "2000001108724193",
+                "original_transaction_id": "2000001108724193",
+                "purchase_date": "2024-01-09 02:00:00 Etc/GMT",
+                "original_purchase_date": "2024-01-09 02:00:00 Etc/GMT",
+                "expires_date": "2099-12-31 23:59:59 Etc/GMT",
+                "is_trial_period": "false"
+            }
+        ]
+    },
+    "latest_receipt_info": [
+        {
+            "quantity": "1",
+            "product_id": "com.algoriddim.djay_pro_yearly",
+            "transaction_id": "2000001108724193",
+            "original_transaction_id": "2000001108724193",
+            "purchase_date": "2024-01-09 02:00:00 Etc/GMT",
+            "original_purchase_date": "2024-01-09 02:00:00 Etc/GMT",
+            "expires_date": "2099-12-31 23:59:59 Etc/GMT",
+            "is_trial_period": "false"
+        }
+    ]
+};
+
+if (objc && typeof objc === "object" && !Array.isArray(objc)) {
+    Object.assign(objc, djayPatch);
+} else {
+    objc = djayPatch;
+}
+
+var out = { body: JSON.stringify(objc) };
+try {
+  if (typeof $response !== "undefined" && $response && $response.headers) {
+    var h = Object.assign({}, $response.headers);
+    h["Cache-Control"] = "no-store, no-cache, must-revalidate";
+    h["Pragma"] = "no-cache";
+    delete h["ETag"];
+    delete h["etag"];
+    delete h["If-None-Match"];
+    delete h["if-none-match"];
+    out.headers = h;
+  }
+} catch (e) {}
+$done(out);
+})();

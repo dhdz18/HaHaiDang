@@ -1,0 +1,44 @@
+/*
+ * @name: Busuu Premium Unlock
+ * @author: Nguyễn Ngọc Anh Tú (z3rokaze)
+ * @homepage: https://github.com/K4Z3X0R/NguyenNgocAnhTu
+ * @date: 2026-05-09
+ */
+
+(function () {
+var rawBody = ($response && $response.body) || "";
+var objc;
+try { objc = JSON.parse(rawBody); } catch (e) {}
+
+if (!objc || typeof objc !== "object" || Array.isArray(objc) || !objc.user || typeof objc.user !== "object") {
+    // Không có user object -> để nguyên, KHÔNG bịa id/email (tránh hỏng đồng bộ/đăng nhập)
+    $done({});
+} else {
+    objc.user.premium = true;
+    objc.user.premium_until = "2099-12-31T23:59:59.000Z";
+    objc.user.subscription_type = "premium_plus";
+    objc.user.is_trial = false;
+    objc.user.features = {
+        "offline_mode": true,
+        "grammar_review": true,
+        "vocabulary_trainer": true,
+        "travel_courses": true,
+        "business_courses": true,
+        "certificates": true
+    };
+    var out = { body: JSON.stringify(objc) };
+    try {
+      if (typeof $response !== "undefined" && $response && $response.headers) {
+        var h = Object.assign({}, $response.headers);
+        h["Cache-Control"] = "no-store, no-cache, must-revalidate";
+        h["Pragma"] = "no-cache";
+        delete h["ETag"];
+        delete h["etag"];
+        delete h["If-None-Match"];
+        delete h["if-none-match"];
+        out.headers = h;
+      }
+    } catch (e) {}
+    $done(out);
+}
+})();
